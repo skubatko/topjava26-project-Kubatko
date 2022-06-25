@@ -1,0 +1,35 @@
+{
+  "groups": [
+    {
+      "name": "msa.integration.alpp-comn-ms",
+      "type": "ru.skubatko.dev.topjava.client.config.TopJavaProjectClientProps",
+      "sourceType": "ru.skubatko.dev.topjava.client.config.TopJavaProjectClientProps"
+    },
+    {
+      "name": "msa.integration.topjava-project",
+      "type": "ru.skubatko.dev.topjava.client.config.TopJavaProjectClientProps",
+      "sourceType": "ru.skubatko.dev.topjava.client.config.TopJavaProjectClientProps"
+    }
+  ],
+  "properties": [
+    {
+      "name": "msa.integration.alpp-comn-ms.connection-timeout",
+      "type": "java.time.Duration",
+      "sourceType": "ru.skubatko.dev.topjava.client.config.TopJavaProjectClientProps",
+      "defaultValue": "5s"
+    },
+    {
+      "name": "msa.integration.alpp-comn-ms.read-timeout",
+      "type": "java.time.Duration",
+      "sourceType": "ru.skubatko.dev.topjava.client.config.TopJavaProjectClientProps",
+      "defaultValue": "10s"
+    },
+    {
+      "name": "msa.integration.alpp-comn-ms.url",
+      "type": "java.lang.String",
+      "sourceType": "ru.skubatko.dev.topjava.client.config.TopJavaProjectClientProps",
+      "defaultValue": ""
+    }
+  ],
+  "hints": []
+}
