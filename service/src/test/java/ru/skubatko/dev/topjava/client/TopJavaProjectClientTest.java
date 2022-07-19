@@ -6,13 +6,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import ru.skubatko.dev.topjava.service.TopJavaProjectApplication;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("Клиент TopJava Project")
-@SpringBootTest(classes = TopJavaProjectApplication.class,
-        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@ActiveProfiles("test")
+@SpringBootTest(classes = TopJavaProjectApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class TopJavaProjectClientTest {
 
     @Autowired

@@ -1,24 +1,24 @@
 package ru.skubatko.dev.topjava.service.config;
 
+import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import ru.skubatko.dev.topjava.common.SerializationHelper;
+import ru.skubatko.dev.topjava.service.util.JsonUtil;
 
 @Configuration
 public class JacksonConfig {
 
+    // https://stackoverflow.com/a/46947975/548473
     @Bean
-    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-        jsonConverter.setObjectMapper(jsonObjectMapper());
-        jsonConverter.setDefaultCharset(null);
-        return jsonConverter;
+    Module module() {
+        return new Hibernate5Module();
     }
 
-    @Bean
-    public ObjectMapper jsonObjectMapper() {
-        return SerializationHelper.preconfiguredJsonObjectMapper();
+    @Autowired
+    public void storeObjectMapper(ObjectMapper objectMapper) {
+        JsonUtil.setMapper(objectMapper);
     }
 }

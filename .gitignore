@@ -11,3 +11,9 @@ target/
 .settings/
 .project
 .classpath
+
+# Misc
+out
+target
+log
+*.patch

@@ -1,5 +1,10 @@
 server:
-  port: 8081
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8 # Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly
+      enabled: true # Enable http encoding support
+      force: true
 
 spring:
   application:
@@ -8,30 +13,43 @@ spring:
 
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:topjava;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
+    url: jdbc:h2:mem:voting;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
     username: sa
     password:
 
   sql:
     init:
-      schema-locations: classpath:db/schema.sql
       data-locations: classpath:db/data.sql
 
   jpa:
     open-in-view: false
     database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
         use_sql_comments: true
-    defer-datasource-initialization: true
+        default_batch_fetch_size: 20
+        # https://stackoverflow.com/questions/21257819/what-is-the-difference-between-hibernate-jdbc-fetch-size-and-hibernate-jdbc-batc
+        jdbc.batch_size: 20
+
+  jackson:
+    visibility:
+      field: any
+      getter: none
+      setter: none
+      is-getter: none
 
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+  cache:
+    cache-names: users
+    caffeine.spec: maximumSize=1, expireAfterAccess=60s
 
 springdoc:
   swagger-ui:
@@ -44,7 +62,8 @@ springdoc:
 
 logging:
   level:
-    root: INFO
-    org.springframework.web: DEBUG
+    root: WARN
     org.springframework.orm.jpa: DEBUG
+    org.springframework.web: INFO
+    org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: DEBUG
     ru.skubatko.dev: TRACE

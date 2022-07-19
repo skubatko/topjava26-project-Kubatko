@@ -1,0 +1,23 @@
+server:
+  port: 8181
+
+spring.cache.type: none
+
+msa:
+  integration:
+    topjava-project:
+      url: http://localhost:8181
+      read-timeout: PT30S
+      connection-timeout: PT15S
+
+logging:
+  charset.console: UTF-8
+  pattern.console: "%white([%thread]) %highlight(%-5level) %cyan(%logger{5}:%L) - %msg%n"
+  level:
+    root: INFO
+    org.springframework.orm.jpa: DEBUG
+    org.hibernate: INFO
+    org.springframework.web: DEBUG
+    org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: DEBUG
+    org.springframework.web.reactive: DEBUG
+    ru.skubatko.dev: TRACE
