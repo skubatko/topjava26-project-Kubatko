@@ -61,37 +61,18 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/admin-api-v1.0.0.yaml
-                            </inputSpec>
+                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            </configurationFile>
+                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            </ignoreFileOverride>
+                            <inputSpec>${project.basedir}/src/main/resources/spec/admin-api-v1.0.0.yaml</inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
                                 <artifactId>api-admin</artifactId>
                                 <artifactDescription>TopJava Project. Admin API</artifactDescription>
-                                <dateLibrary>java8-localdatetime</dateLibrary>
-                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                                <interfaceOnly>true</interfaceOnly>
                                 <apiPackage>ru.skubatko.dev.topjava.api.admin.api</apiPackage>
                                 <modelPackage>ru.skubatko.dev.topjava.api.admin.dto</modelPackage>
-                                <skipDefaultInterface>true</skipDefaultInterface>
-                                <serializableModel>true</serializableModel>
-                                <snapshotVersion>false</snapshotVersion>
-                                <sortModelPropertiesByRequiredFlag>false</sortModelPropertiesByRequiredFlag>
-                                <sortParamsByRequiredFlag>false</sortParamsByRequiredFlag>
-                                <sortModelPropertiesByRequiredFlag>false</sortModelPropertiesByRequiredFlag>
-                                <exceptionHandler>false</exceptionHandler>
-                                <sourceFolder>src/main/java</sourceFolder>
-                                <performBeanValidation>true</performBeanValidation>
-                                <useBeanValidation>true</useBeanValidation>
-                                <modelMutable>false</modelMutable>
-                                <enumPropertyNaming>UPPERCASE</enumPropertyNaming>
                             </configOptions>
-                            <typeMappings>
-                                <typeMapping>java.time.OffsetDateTime=java.time.LocalDateTime</typeMapping>
-                                <typeMapping>Integer=Long</typeMapping>
-                            </typeMappings>
-                            <importMappings>
-                                <importMapping>java.lang.Integer=java.lang.Long</importMapping>
-                            </importMappings>
                         </configuration>
                     </execution>
                     <execution>
@@ -100,37 +81,18 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/heartbeat-api-v1.0.0.yaml
-                            </inputSpec>
+                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            </configurationFile>
+                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            </ignoreFileOverride>
+                            <inputSpec>${project.basedir}/src/main/resources/spec/heartbeat-api-v1.0.0.yaml</inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
                                 <artifactId>api-heartbeat</artifactId>
                                 <artifactDescription>TopJava Project. Heartbeat API</artifactDescription>
-                                <dateLibrary>java8-localdatetime</dateLibrary>
-                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                                <interfaceOnly>true</interfaceOnly>
                                 <apiPackage>ru.skubatko.dev.topjava.api.heartbeat.api</apiPackage>
                                 <modelPackage>ru.skubatko.dev.topjava.api.heartbeat.dto</modelPackage>
-                                <skipDefaultInterface>true</skipDefaultInterface>
-                                <serializableModel>true</serializableModel>
-                                <snapshotVersion>false</snapshotVersion>
-                                <sortModelPropertiesByRequiredFlag>false</sortModelPropertiesByRequiredFlag>
-                                <sortParamsByRequiredFlag>false</sortParamsByRequiredFlag>
-                                <sortModelPropertiesByRequiredFlag>false</sortModelPropertiesByRequiredFlag>
-                                <exceptionHandler>false</exceptionHandler>
-                                <sourceFolder>src/main/java</sourceFolder>
-                                <performBeanValidation>true</performBeanValidation>
-                                <useBeanValidation>true</useBeanValidation>
-                                <modelMutable>false</modelMutable>
-                                <enumPropertyNaming>UPPERCASE</enumPropertyNaming>
                             </configOptions>
-                            <typeMappings>
-                                <typeMapping>java.time.OffsetDateTime=java.time.LocalDateTime</typeMapping>
-                                <typeMapping>Integer=Long</typeMapping>
-                            </typeMappings>
-                            <importMappings>
-                                <importMapping>java.lang.Integer=java.lang.Long</importMapping>
-                            </importMappings>
                         </configuration>
                     </execution>
                     <execution>
@@ -139,37 +101,18 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/user-api-v1.0.0.yaml
-                            </inputSpec>
+                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            </configurationFile>
+                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            </ignoreFileOverride>
+                            <inputSpec>${project.basedir}/src/main/resources/spec/user-api-v1.0.0.yaml</inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
                                 <artifactId>api-user</artifactId>
                                 <artifactDescription>TopJava Project. User API</artifactDescription>
-                                <dateLibrary>java8-localdatetime</dateLibrary>
-                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                                <interfaceOnly>true</interfaceOnly>
                                 <apiPackage>ru.skubatko.dev.topjava.api.user.api</apiPackage>
                                 <modelPackage>ru.skubatko.dev.topjava.api.user.dto</modelPackage>
-                                <skipDefaultInterface>true</skipDefaultInterface>
-                                <serializableModel>true</serializableModel>
-                                <snapshotVersion>false</snapshotVersion>
-                                <sortModelPropertiesByRequiredFlag>false</sortModelPropertiesByRequiredFlag>
-                                <sortParamsByRequiredFlag>false</sortParamsByRequiredFlag>
-                                <sortModelPropertiesByRequiredFlag>false</sortModelPropertiesByRequiredFlag>
-                                <exceptionHandler>false</exceptionHandler>
-                                <sourceFolder>src/main/java</sourceFolder>
-                                <performBeanValidation>true</performBeanValidation>
-                                <useBeanValidation>true</useBeanValidation>
-                                <modelMutable>false</modelMutable>
-                                <enumPropertyNaming>UPPERCASE</enumPropertyNaming>
                             </configOptions>
-                            <typeMappings>
-                                <typeMapping>java.time.OffsetDateTime=java.time.LocalDateTime</typeMapping>
-                                <typeMapping>Integer=Long</typeMapping>
-                            </typeMappings>
-                            <importMappings>
-                                <importMapping>java.lang.Integer=java.lang.Long</importMapping>
-                            </importMappings>
                         </configuration>
                     </execution>
                 </executions>

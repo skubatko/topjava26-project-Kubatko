@@ -1,6 +1,7 @@
 package ru.skubatko.dev.topjava.service.model;
 
-import lombok.NoArgsConstructor;
+import lombok.*;
+import ru.skubatko.dev.topjava.service.HasId;
 
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -13,22 +14,21 @@ import javax.persistence.Table;
         @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id")
 })
 @Entity
-@NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "dishes")
-public class Dish extends NamedEntity {
+@ToString(callSuper = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Dish extends NamedEntity implements HasId {
     public static final String ALL_SORTED = "Dish.getAll";
     public static final String UPDATE = "Dish.update";
     public static final String DELETE = "Dish.delete";
 
-    public Dish(Integer id, String name) {
-        super(id, name);
+    public Dish(Dish d) {
+        this(d.id, d.name);
     }
 
-    @Override
-    public String toString() {
-        return "Dish{" +
-                "id=" + id +
-                ", name='" + name +
-                "}";
+    public Dish(Integer id, String name) {
+        super(id, name);
     }
 }
