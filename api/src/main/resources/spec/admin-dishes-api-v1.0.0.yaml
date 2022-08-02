@@ -1,21 +1,21 @@
 openapi: 3.0.0
 info:
-  title: topjava26-project-rest-admin-restaurants-v1
+  title: topjava26-project-rest-admin-dishes-v1
   version: 1.0.0
-  description: 'TopJava Project. Admin restaurants API'
+  description: 'TopJava Project. Admin dishes API'
 
 servers:
   - url: 'http://localhost:8080'
     description: Local
 
 paths:
-  /api/admin/v1/restaurants:
+  /api/admin/v1/dishes:
     get:
       operationId: getAll
-      summary: Get list of available restaurants
-      description: Получение списка ресторанов
+      summary: Get list of available dishes
+      description: Получение списка блюд
       tags:
-        - adminRestaurant
+        - adminDishes
       responses:
         '200':
           description: OK
@@ -25,7 +25,7 @@ paths:
                 type: array
                 maxItems: 100000
                 items:
-                  $ref: '#/components/schemas/RestaurantTO'
+                  $ref: '#/components/schemas/DishTO'
         '400':
           description: Bad Request
         '401':
@@ -36,15 +36,15 @@ paths:
           description: Internal Server Error
     post:
       operationId: create
-      summary: Create restaurant
-      description: Создание ресторана
+      summary: Create dish
+      description: Создание блюда
       tags:
-        - adminRestaurant
+        - adminDishes
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RestaurantTO'
+              $ref: '#/components/schemas/DishTO'
         required: true
       responses:
         '201':
@@ -59,13 +59,13 @@ paths:
           description: Internal Server Error
         '503':
           description: Service Unavailable
-  /api/admin/v1/restaurants/{id}:
+  /api/admin/v1/dishes/{id}:
     get:
       operationId: get
-      summary: Get restaurant
-      description: Получение ресторана по идентификатору
+      summary: Get dish
+      description: Получение блюда по идентификатору
       tags:
-        - adminRestaurant
+        - adminDishes
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
@@ -74,7 +74,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestaurantTO'
+                $ref: '#/components/schemas/DishTO'
         '400':
           description: Bad Request
         '401':
@@ -85,17 +85,17 @@ paths:
           description: Internal Server Error
     put:
       operationId: update
-      summary: Update restaurant
-      description: Обновление данных ресторана по идентификатору
+      summary: Update dish
+      description: Обновление данных блюда по идентификатору
       tags:
-        - adminRestaurant
+        - adminDishes
       parameters:
         - $ref: '#/components/parameters/id'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RestaurantTO'
+              $ref: '#/components/schemas/DishTO'
         required: true
       responses:
         '204':
@@ -112,10 +112,10 @@ paths:
           description: Service Unavailable
     delete:
       operationId: delete
-      summary: Delete restaurant
-      description: Удаление ресторана по идентификатору
+      summary: Delete dish
+      description: Удаление блюда по идентификатору
       tags:
-        - adminRestaurant
+        - adminDishes
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
@@ -134,10 +134,10 @@ paths:
 
 components:
   schemas:
-    RestaurantTO:
-      title: RestaurantsTO
+    DishTO:
+      title: DishTO
       type: object
-      description: Ресторан
+      description: Блюдо
       additionalProperties: false
       properties:
         id:

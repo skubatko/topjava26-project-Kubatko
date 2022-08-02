@@ -56,6 +56,48 @@
                 <version>${openapi-generator-maven-plugin.version}</version>
                 <executions>
                     <execution>
+                        <id>admin-dishes-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            </configurationFile>
+                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            </ignoreFileOverride>
+                            <inputSpec>${project.basedir}/src/main/resources/spec/admin-dishes-api-v1.0.0.yaml
+                            </inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <artifactId>api-admin-dishes</artifactId>
+                                <artifactDescription>TopJava Project. Admin dishes API</artifactDescription>
+                                <apiPackage>ru.skubatko.dev.topjava.api.admin.api.dishes</apiPackage>
+                                <modelPackage>ru.skubatko.dev.topjava.api.admin.dto.dishes</modelPackage>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>admin-menu-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            </configurationFile>
+                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            </ignoreFileOverride>
+                            <inputSpec>${project.basedir}/src/main/resources/spec/admin-menu-api-v1.0.0.yaml
+                            </inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <artifactId>api-admin-menu</artifactId>
+                                <artifactDescription>TopJava Project. Admin menu API</artifactDescription>
+                                <apiPackage>ru.skubatko.dev.topjava.api.admin.api.menu</apiPackage>
+                                <modelPackage>ru.skubatko.dev.topjava.api.admin.dto.menu</modelPackage>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>admin-restaurants-api</id>
                         <goals>
                             <goal>generate</goal>

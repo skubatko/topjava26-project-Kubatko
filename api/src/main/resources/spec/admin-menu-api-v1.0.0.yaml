@@ -1,0 +1,246 @@
+openapi: 3.0.0
+info:
+  title: topjava26-project-rest-admin-menu-v1
+  version: 1.0.0
+  description: 'TopJava Project. Admin menu API'
+
+servers:
+  - url: 'http://localhost:8080'
+    description: Local
+
+paths:
+  /api/admin/v1/menu:
+    get:
+      operationId: getAll
+      summary: Get list of available menu items
+      description: Получение всех позиций меню
+      tags:
+        - adminMenu
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 100000
+                items:
+                  $ref: '#/components/schemas/MenuItemTO'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+    post:
+      operationId: create
+      summary: Create menu item
+      description: Создание позиции меню
+      tags:
+        - adminMenu
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItemTO'
+        required: true
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /api/admin/v1/menu/{id}:
+    get:
+      operationId: get
+      summary: Get dish
+      description: Получение позиции меню по идентификатору
+      tags:
+        - adminMenu
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItemTO'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+    put:
+      operationId: update
+      summary: Update dish
+      description: Обновление данных позиции меню по идентификатору
+      tags:
+        - adminMenu
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItemTO'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+    delete:
+      operationId: delete
+      summary: Delete dish
+      description: Удаление позиции меню по идентификатору
+      tags:
+        - adminMenu
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /api/admin/v1/menu/search:
+    get:
+      operationId: getByParams
+      summary: Search menu items by parameters
+      description: Поиск позиций меню по параметрам
+      tags:
+        - adminMenu
+      parameters:
+        - $ref: '#/components/parameters/day'
+        - $ref: '#/components/parameters/dishId'
+        - $ref: '#/components/parameters/restaurantId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 100000
+                items:
+                  $ref: '#/components/schemas/MenuItemTO'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+
+components:
+  schemas:
+    MenuItemTO:
+      title: MenuItemTO
+      type: object
+      description: Позиция меню
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Идентификатор
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+        day:
+          type: string
+          minLength: 10
+          maxLength: 10
+          description: Дата
+        price:
+          type: integer
+          description: Цена в копейках
+          format: int32
+          minimum: 10000
+          maximum: 500000
+        dishId:
+          type: integer
+          description: Идентификатор блюда
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+        restaurantId:
+          type: integer
+          description: Идентификатор ресторана
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+      required:
+        - id
+        - day
+        - price
+        - dishId
+        - restaurantId
+  parameters:
+    id:
+      name: id
+      description: Идентификатор
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 2147483647
+    day:
+      name: day
+      description: День
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 10
+        maxLength: 10
+    dishId:
+      name: dishId
+      description: Идентификатор блюда
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 2147483647
+    restaurantId:
+      name: restaurantId
+      description: Идентификатор ресторана
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 2147483647
