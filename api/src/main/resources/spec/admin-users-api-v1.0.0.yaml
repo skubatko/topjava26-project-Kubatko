@@ -1,0 +1,200 @@
+openapi: 3.0.0
+info:
+  title: topjava26-project-rest-admin-users-v1
+  version: 1.0.0
+  description: 'TopJava Project. Admin users API'
+
+servers:
+  - url: 'http://localhost:8080'
+    description: Local
+
+paths:
+  /api/admin/v1/users:
+    get:
+      operationId: getAll
+      summary: Get list of available users
+      description: Получение списка пользователей
+      tags:
+        - adminUser
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 100000
+                items:
+                  $ref: '#/components/schemas/UserTO'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+    post:
+      operationId: create
+      summary: Create user
+      description: Создание пользователя
+      tags:
+        - adminUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTO'
+        required: true
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /api/admin/v1/users/{id}:
+    get:
+      operationId: get
+      summary: Get user
+      description: Получение пользователя по идентификатору
+      tags:
+        - adminUser
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTO'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+    put:
+      operationId: update
+      summary: Update user
+      description: Обновление данных пользователя по идентификатору
+      tags:
+        - adminUser
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTO'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+    delete:
+      operationId: delete
+      summary: Delete user
+      description: Удаление пользователя по идентификатору
+      tags:
+        - adminUser
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+
+components:
+  schemas:
+    UserTO:
+      title: UserTO
+      type: object
+      description: Пользователь
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Идентификатор
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Имя
+        email:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Email
+        password:
+          type: string
+          minLength: 5
+          maxLength: 100
+          description: Пароль
+        enabled:
+          type: boolean
+          description: Признак активности
+        roles:
+          type: array
+          description: Роли
+          maxItems: 16
+          items:
+            $ref: '#/components/schemas/RoleTO'
+      required:
+        - email
+    RoleTO:
+      title: RoleTO
+      type: object
+      description: Роль пользователя
+      additionalProperties: false
+      properties:
+        role:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Роль
+  parameters:
+    id:
+      name: id
+      description: Идентификатор
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 2147483647

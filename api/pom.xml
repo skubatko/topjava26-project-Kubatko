@@ -56,7 +56,7 @@
                 <version>${openapi-generator-maven-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>admin-api</id>
+                        <id>admin-restaurants-api</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -65,13 +65,35 @@
                             </configurationFile>
                             <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
                             </ignoreFileOverride>
-                            <inputSpec>${project.basedir}/src/main/resources/spec/admin-api-v1.0.0.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/spec/admin-restaurants-api-v1.0.0.yaml
+                            </inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
-                                <artifactId>api-admin</artifactId>
-                                <artifactDescription>TopJava Project. Admin API</artifactDescription>
-                                <apiPackage>ru.skubatko.dev.topjava.api.admin.api</apiPackage>
-                                <modelPackage>ru.skubatko.dev.topjava.api.admin.dto</modelPackage>
+                                <artifactId>api-admin-restaurants</artifactId>
+                                <artifactDescription>TopJava Project. Admin restaurants API</artifactDescription>
+                                <apiPackage>ru.skubatko.dev.topjava.api.admin.api.restaurants</apiPackage>
+                                <modelPackage>ru.skubatko.dev.topjava.api.admin.dto.restaurants</modelPackage>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>admin-users-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            </configurationFile>
+                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            </ignoreFileOverride>
+                            <inputSpec>${project.basedir}/src/main/resources/spec/admin-users-api-v1.0.0.yaml
+                            </inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <artifactId>api-admin-users</artifactId>
+                                <artifactDescription>TopJava Project. Admin users API</artifactDescription>
+                                <apiPackage>ru.skubatko.dev.topjava.api.admin.api.users</apiPackage>
+                                <modelPackage>ru.skubatko.dev.topjava.api.admin.dto.users</modelPackage>
                             </configOptions>
                         </configuration>
                     </execution>

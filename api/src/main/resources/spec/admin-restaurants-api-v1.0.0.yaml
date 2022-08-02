@@ -1,0 +1,167 @@
+openapi: 3.0.0
+info:
+  title: topjava26-project-rest-admin-restaurants-v1
+  version: 1.0.0
+  description: 'TopJava Project. Admin restaurants API'
+
+servers:
+  - url: 'http://localhost:8080'
+    description: Local
+
+paths:
+  /api/admin/v1/restaurants:
+    get:
+      operationId: getAll
+      summary: Get list of available restaurants
+      description: Получение списка ресторанов
+      tags:
+        - adminRestaurant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 100000
+                items:
+                  $ref: '#/components/schemas/RestaurantTO'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+    post:
+      operationId: create
+      summary: Create restaurants
+      description: Создание ресторана
+      tags:
+        - adminRestaurant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestaurantTO'
+        required: true
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /api/admin/v1/restaurants/{id}:
+    get:
+      operationId: get
+      summary: Get restaurant
+      description: Получение ресторана по идентификатору
+      tags:
+        - adminRestaurant
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestaurantTO'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+    put:
+      operationId: update
+      summary: Update restaurant
+      description: Обновление данных ресторана по идентификатору
+      tags:
+        - adminRestaurant
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestaurantTO'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+    delete:
+      operationId: delete
+      summary: Delete restaurant
+      description: Удаление ресторана по идентификатору
+      tags:
+        - adminRestaurant
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+
+components:
+  schemas:
+    RestaurantTO:
+      title: RestaurantsTO
+      type: object
+      description: Ресторан
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Идентификатор
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Название
+      required:
+        - id
+        - name
+  parameters:
+    id:
+      name: restaurantId
+      description: Идентификатор ресторана
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 2147483647

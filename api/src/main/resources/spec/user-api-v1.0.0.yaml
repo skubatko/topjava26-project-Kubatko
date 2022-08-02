@@ -11,6 +11,7 @@ paths:
     post:
       operationId: vote
       summary: Daily lunch vote
+      description: Голосование за ресторан
       tags:
         - user
       parameters:
@@ -26,8 +27,6 @@ paths:
           description: Access Denied
         '500':
           description: Internal Server Error
-        '502':
-          description: Bad Gateway
 components:
   parameters:
     restaurantId:
