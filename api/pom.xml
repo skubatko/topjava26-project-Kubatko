@@ -177,6 +177,12 @@
                                 <apiPackage>ru.skubatko.dev.topjava.api.user.api</apiPackage>
                                 <modelPackage>ru.skubatko.dev.topjava.api.user.dto</modelPackage>
                             </configOptions>
+                            <typeMappings>
+                                <typeMapping>time=LocalTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>LocalTime=java.time.LocalTime</importMapping>
+                            </importMappings>
                         </configuration>
                     </execution>
                 </executions>

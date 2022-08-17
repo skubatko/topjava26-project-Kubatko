@@ -44,8 +44,7 @@ spring:
       is-getter: none
 
   mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+    pathmatch.matching-strategy: ant_path_matcher
 
   cache:
     cache-names: users
@@ -54,11 +53,14 @@ spring:
 springdoc:
   swagger-ui:
     display-request-duration: true
-    operationsSorter: method
-    disable-swagger-default-url: false
+    disable-swagger-default-url: true
     use-root-path: true
     path: /swagger-ui.html
+    url: /v3/api-docs
   show-actuator: false
+
+app:
+  vote-deadline-time: '11:00'
 
 logging:
   level:

@@ -1,4 +1,4 @@
-package ru.skubatko.dev.topjava.service.web.user;
+package ru.skubatko.dev.topjava.service.web.admin;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

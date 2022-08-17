@@ -13,6 +13,7 @@ import ru.skubatko.dev.topjava.service.model.User;
 import ru.skubatko.dev.topjava.service.repository.UserRepository;
 import ru.skubatko.dev.topjava.service.web.AbstractControllerTest;
 import ru.skubatko.dev.topjava.service.web.GlobalExceptionHandler;
+import ru.skubatko.dev.topjava.service.web.admin.AdminUserController;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertFalse;

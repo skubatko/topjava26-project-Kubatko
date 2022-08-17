@@ -9,10 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@NamedQueries({
-        @NamedQuery(name = Vote.ALL_SORTED, query = "SELECT v FROM Vote v WHERE v.user.id=:userId ORDER BY v.day DESC"),
-        @NamedQuery(name = Vote.DELETE, query = "DELETE FROM Vote v WHERE v.id=:id AND v.user.id=:userId"),
-        @NamedQuery(name = Vote.UPDATE, query = "UPDATE Vote v SET v.day=:day where v.id=:id and v.user.id=:userId")})
 @Entity
 @Getter
 @Setter
@@ -20,9 +16,11 @@ import java.util.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "day"}, name = "votes_unique_user_day_idx")})
 public class Vote extends BaseEntity implements HasId {
-    public static final String ALL_SORTED = "Vote.getAll";
-    public static final String DELETE = "Vote.delete";
-    public static final String UPDATE = "Vote.update";
+    public Vote(User user, Restaurant restaurant) {
+        this.day = new Date();
+        this.user = user;
+        this.restaurant = restaurant;
+    }
 
     @Column(name = "day", nullable = false)
     @NotNull

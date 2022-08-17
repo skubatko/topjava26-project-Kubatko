@@ -1,4 +1,4 @@
-package ru.skubatko.dev.topjava.service.web.user;
+package ru.skubatko.dev.topjava.service.web.admin;
 
 import lombok.AllArgsConstructor;
 import org.springframework.lang.NonNull;

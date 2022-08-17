@@ -1,4 +1,4 @@
-package ru.skubatko.dev.topjava.service.web.user;
+package ru.skubatko.dev.topjava.service.web.admin;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
@@ -21,9 +21,9 @@ import java.net.URI;
 import static ru.skubatko.dev.topjava.service.util.validation.ValidationUtil.assureIdConsistent;
 import static ru.skubatko.dev.topjava.service.util.validation.ValidationUtil.checkNew;
 
+@Slf4j
 @RestController
 @RequestMapping(value = ProfileController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-@Slf4j
 // TODO: cache only most requested data!
 @CacheConfig(cacheNames = "users")
 public class ProfileController extends AbstractUserController {
