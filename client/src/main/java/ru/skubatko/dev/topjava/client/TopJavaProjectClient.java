@@ -3,7 +3,7 @@ package ru.skubatko.dev.topjava.client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClient;
-import ru.skubatko.dev.topjava.api.heartbeat.api.HeartbeatApi;
+import ru.skubatko.dev.topjava.api.api.HeartbeatApi;
 
 @RequiredArgsConstructor
 public class TopJavaProjectClient implements HeartbeatApi {

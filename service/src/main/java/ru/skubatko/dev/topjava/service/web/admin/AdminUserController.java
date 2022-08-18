@@ -1,88 +1,71 @@
 package ru.skubatko.dev.topjava.service.web.admin;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.skubatko.dev.topjava.service.model.User;
+import ru.skubatko.dev.topjava.api.api.AdminUserApi;
+import ru.skubatko.dev.topjava.api.model.UserTO;
+import ru.skubatko.dev.topjava.service.service.UserService;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-import static ru.skubatko.dev.topjava.service.util.validation.ValidationUtil.assureIdConsistent;
-import static ru.skubatko.dev.topjava.service.util.validation.ValidationUtil.checkNew;
-
-@RestController
-@RequestMapping(value = AdminUserController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
-// TODO: cache only most requested data!
-@CacheConfig(cacheNames = "users")
-public class AdminUserController extends AbstractUserController {
+@RestController
+@RequiredArgsConstructor
+public class AdminUserController extends AbstractUserController implements AdminUserApi {
+    private final UserService service;
 
     static final String REST_URL = "/api/admin/users";
 
     @Override
-    @GetMapping("/{id}")
-    public ResponseEntity<User> get(@PathVariable int id) {
-        return super.get(id);
+    public ResponseEntity<UserTO> get(Integer id) {
+        return ResponseEntity.ok(service.get(id));
     }
 
     @Override
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        super.delete(id);
-    }
-
-    @GetMapping
-    @Cacheable
-    public List<User> getAll() {
+    public ResponseEntity<List<UserTO>> getAll() {
         log.info("getAll");
-        return repository.findAll(Sort.by(Sort.Direction.ASC, "name", "email"));
+        return ResponseEntity.ok(service.getAll());
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @CacheEvict(allEntries = true)
-    public ResponseEntity<User> createWithLocation(@Valid @RequestBody User user) {
+    @Override
+    @GetMapping("/by-email")
+    public ResponseEntity<UserTO> getByEmail(String email) {
+        log.info("getByEmail {}", email);
+        return ResponseEntity.ok(service.getByEmail(email));
+    }
+
+    @Override
+    public ResponseEntity<Void> enable(Integer id, Boolean enabled) {
+        log.info(enabled ? "enable {}" : "disable {}", id);
+        service.enable(id, enabled);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<UserTO> create(UserTO user) {
         log.info("create {}", user);
-        checkNew(user);
-        User created = prepareAndSave(user);
+        UserTO created = service.create(user);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CacheEvict(allEntries = true)
-    public void update(@Valid @RequestBody User user, @PathVariable int id) {
+    @Override
+    public ResponseEntity<Void> update(Integer id, UserTO user) {
         log.info("update {} with id={}", user, id);
-        assureIdConsistent(user, id);
-        prepareAndSave(user);
+        service.update(id, user);
+        return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/by-email")
-    public ResponseEntity<User> getByEmail(@RequestParam String email) {
-        log.info("getByEmail {}", email);
-        return ResponseEntity.of(repository.getByEmail(email));
-    }
-
-    @Transactional
-    @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CacheEvict(allEntries = true)
-    public void enable(@PathVariable int id, @RequestParam boolean enabled) {
-        log.info(enabled ? "enable {}" : "disable {}", id);
-        User user = repository.getById(id);
-        user.setEnabled(enabled);
+    @Override
+    public ResponseEntity<Void> delete(Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

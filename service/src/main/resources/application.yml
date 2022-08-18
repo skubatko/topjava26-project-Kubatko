@@ -43,8 +43,8 @@ spring:
       setter: none
       is-getter: none
 
-  mvc:
-    pathmatch.matching-strategy: ant_path_matcher
+  mvc.pathmatch.matching-strategy: ant_path_matcher
+  jmx.enabled: false
 
   cache:
     cache-names: users
@@ -65,7 +65,4 @@ app:
 logging:
   level:
     root: WARN
-    org.springframework.orm.jpa: DEBUG
-    org.springframework.web: DEBUG
-    org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: DEBUG
-    ru.skubatko.dev: TRACE
+    ru.skubatko.dev: INFO

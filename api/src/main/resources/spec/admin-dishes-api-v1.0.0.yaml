@@ -15,7 +15,7 @@ paths:
       summary: Get list of available dishes
       description: Получение списка блюд
       tags:
-        - adminDishes
+        - adminDish
       responses:
         '200':
           description: OK
@@ -39,7 +39,7 @@ paths:
       summary: Create dish
       description: Создание блюда
       tags:
-        - adminDishes
+        - adminDish
       requestBody:
         content:
           application/json:
@@ -65,7 +65,7 @@ paths:
       summary: Get dish
       description: Получение блюда по идентификатору
       tags:
-        - adminDishes
+        - adminDish
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
@@ -88,7 +88,7 @@ paths:
       summary: Update dish
       description: Обновление данных блюда по идентификатору
       tags:
-        - adminDishes
+        - adminDish
       parameters:
         - $ref: '#/components/parameters/id'
       requestBody:
@@ -115,7 +115,7 @@ paths:
       summary: Delete dish
       description: Удаление блюда по идентификатору
       tags:
-        - adminDishes
+        - adminDish
       parameters:
         - $ref: '#/components/parameters/id'
       responses:

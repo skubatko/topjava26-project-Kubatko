@@ -1,4 +1,4 @@
-package ru.skubatko.dev.topjava.service.web.user;
+package ru.skubatko.dev.topjava.service.web.admin;
 
 import ru.skubatko.dev.topjava.service.model.Role;
 import ru.skubatko.dev.topjava.service.model.User;

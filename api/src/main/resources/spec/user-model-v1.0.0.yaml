@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: topjava26-project-rest-user-profiles-v1
+  version: 1.0.0
+  description: 'TopJava Project. User profiles API'
+
+servers:
+  - url: 'http://localhost:8080'
+    description: Local
+
+paths:
+  /api:
+    get:
+      operationId: get
+      responses:
+        '200':
+          description: OK
+
+components:
+  schemas:
+    UserTO:
+      title: UserTO
+      type: object
+      description: Пользователь
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Идентификатор
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Имя
+        email:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Email
+        password:
+          type: string
+          minLength: 5
+          maxLength: 100
+          description: Пароль
+        enabled:
+          type: boolean
+          description: Признак активности
+        roles:
+          type: array
+          description: Роли
+          maxItems: 16
+          items:
+            $ref: '#/components/schemas/RoleTO'
+      required:
+        - email
+    RoleTO:
+      title: RoleTO
+      type: object
+      description: Роль пользователя
+      additionalProperties: false
+      properties:
+        role:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Роль

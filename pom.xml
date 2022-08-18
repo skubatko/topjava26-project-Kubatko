@@ -28,7 +28,7 @@
 
         <java.version>17</java.version>
 
-        <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <openapi-generator-maven-plugin.version>5.0.0</openapi-generator-maven-plugin.version>
 
         <jackson.version>2.12.1</jackson.version>
@@ -37,7 +37,7 @@
         <springfox.version>3.0.0</springfox.version>
         <springdoc.version>1.6.9</springdoc.version>
         <jsoup.version>1.14.2</jsoup.version>
-        <mapstruct.version>1.4.1.Final</mapstruct.version>
+        <mapstruct.version>1.5.2.Final</mapstruct.version>
     </properties>
 
     <dependencyManagement>

@@ -11,6 +11,11 @@
 
     <artifactId>api</artifactId>
 
+    <properties>
+        <openapi.apiPackage>ru.skubatko.dev.topjava.api.api</openapi.apiPackage>
+        <openapi.modelPackage>ru.skubatko.dev.topjava.api.model</openapi.modelPackage>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -56,23 +61,50 @@
                 <version>${openapi-generator-maven-plugin.version}</version>
                 <executions>
                     <execution>
+                        <id>user-model</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <generateApis>false</generateApis>
+                            <configurationFile>
+                                ${basedir}/src/main/resources/openapi-generator-config.json
+                            </configurationFile>
+                            <ignoreFileOverride>
+                                ${basedir}/src/main/resources/.openapi-generator-ignore
+                            </ignoreFileOverride>
+                            <inputSpec>
+                                ${basedir}/src/main/resources/spec/user-model-v1.0.0.yaml
+                            </inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <artifactId>model-user</artifactId>
+                                <artifactDescription>TopJava Project. User model</artifactDescription>
+                                <modelPackage>${openapi.modelPackage}</modelPackage>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>admin-dishes-api</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            <configurationFile>
+                                ${basedir}/src/main/resources/openapi-generator-config.json
                             </configurationFile>
-                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            <ignoreFileOverride>
+                                ${basedir}/src/main/resources/.openapi-generator-ignore
                             </ignoreFileOverride>
-                            <inputSpec>${project.basedir}/src/main/resources/spec/admin-dishes-api-v1.0.0.yaml
+                            <inputSpec>
+                                ${basedir}/src/main/resources/spec/admin-dishes-api-v1.0.0.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
                                 <artifactId>api-admin-dishes</artifactId>
                                 <artifactDescription>TopJava Project. Admin dishes API</artifactDescription>
-                                <apiPackage>ru.skubatko.dev.topjava.api.admin.api.dishes</apiPackage>
-                                <modelPackage>ru.skubatko.dev.topjava.api.admin.dto.dishes</modelPackage>
+                                <apiPackage>${openapi.apiPackage}</apiPackage>
+                                <modelPackage>${openapi.modelPackage}</modelPackage>
                             </configOptions>
                         </configuration>
                     </execution>
@@ -82,18 +114,21 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            <configurationFile>
+                                ${project.basedir}/src/main/resources/openapi-generator-config.json
                             </configurationFile>
-                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            <ignoreFileOverride>
+                                ${project.basedir}/src/main/resources/.openapi-generator-ignore
                             </ignoreFileOverride>
-                            <inputSpec>${project.basedir}/src/main/resources/spec/admin-menu-api-v1.0.0.yaml
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/spec/admin-menu-api-v1.0.0.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
                                 <artifactId>api-admin-menu</artifactId>
                                 <artifactDescription>TopJava Project. Admin menu API</artifactDescription>
-                                <apiPackage>ru.skubatko.dev.topjava.api.admin.api.menu</apiPackage>
-                                <modelPackage>ru.skubatko.dev.topjava.api.admin.dto.menu</modelPackage>
+                                <apiPackage>${openapi.apiPackage}</apiPackage>
+                                <modelPackage>${openapi.modelPackage}</modelPackage>
                             </configOptions>
                         </configuration>
                     </execution>
@@ -103,18 +138,21 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            <configurationFile>
+                                ${project.basedir}/src/main/resources/openapi-generator-config.json
                             </configurationFile>
-                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            <ignoreFileOverride>
+                                ${project.basedir}/src/main/resources/.openapi-generator-ignore
                             </ignoreFileOverride>
-                            <inputSpec>${project.basedir}/src/main/resources/spec/admin-restaurants-api-v1.0.0.yaml
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/spec/admin-restaurants-api-v1.0.0.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
-                                <artifactId>api-admin-restaurants</artifactId>
+                                <artifactId>api-admin-restaurant</artifactId>
                                 <artifactDescription>TopJava Project. Admin restaurants API</artifactDescription>
-                                <apiPackage>ru.skubatko.dev.topjava.api.admin.api.restaurants</apiPackage>
-                                <modelPackage>ru.skubatko.dev.topjava.api.admin.dto.restaurants</modelPackage>
+                                <apiPackage>${openapi.apiPackage}</apiPackage>
+                                <modelPackage>${openapi.modelPackage}</modelPackage>
                             </configOptions>
                         </configuration>
                     </execution>
@@ -124,19 +162,28 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            <configurationFile>
+                                ${project.basedir}/src/main/resources/openapi-generator-config.json
                             </configurationFile>
-                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            <ignoreFileOverride>
+                                ${project.basedir}/src/main/resources/.openapi-generator-ignore
                             </ignoreFileOverride>
-                            <inputSpec>${project.basedir}/src/main/resources/spec/admin-users-api-v1.0.0.yaml
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/spec/admin-users-api-v1.0.0.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
-                                <artifactId>api-admin-users</artifactId>
+                                <artifactId>api-admin-user</artifactId>
                                 <artifactDescription>TopJava Project. Admin users API</artifactDescription>
-                                <apiPackage>ru.skubatko.dev.topjava.api.admin.api.users</apiPackage>
-                                <modelPackage>ru.skubatko.dev.topjava.api.admin.dto.users</modelPackage>
+                                <apiPackage>${openapi.apiPackage}</apiPackage>
+                                <modelPackage>${openapi.modelPackage}</modelPackage>
                             </configOptions>
+                            <typeMappings>
+                                <typeMapping>user=UserTO</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>UserTO=${openapi.modelPackage}.UserTO</importMapping>
+                            </importMappings>
                         </configuration>
                     </execution>
                     <execution>
@@ -145,37 +192,75 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            <configurationFile>
+                                ${project.basedir}/src/main/resources/openapi-generator-config.json
                             </configurationFile>
-                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            <ignoreFileOverride>
+                                ${project.basedir}/src/main/resources/.openapi-generator-ignore
                             </ignoreFileOverride>
-                            <inputSpec>${project.basedir}/src/main/resources/spec/heartbeat-api-v1.0.0.yaml</inputSpec>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/spec/heartbeat-api-v1.0.0.yaml
+                            </inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
                                 <artifactId>api-heartbeat</artifactId>
                                 <artifactDescription>TopJava Project. Heartbeat API</artifactDescription>
-                                <apiPackage>ru.skubatko.dev.topjava.api.heartbeat.api</apiPackage>
-                                <modelPackage>ru.skubatko.dev.topjava.api.heartbeat.dto</modelPackage>
+                                <apiPackage>${openapi.apiPackage}</apiPackage>
+                                <modelPackage>${openapi.modelPackage}</modelPackage>
                             </configOptions>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>user-api</id>
+                        <id>user-profiles-api</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json
+                            <configurationFile>
+                                ${project.basedir}/src/main/resources/openapi-generator-config.json
                             </configurationFile>
-                            <ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            <ignoreFileOverride>
+                                ${project.basedir}/src/main/resources/.openapi-generator-ignore
                             </ignoreFileOverride>
-                            <inputSpec>${project.basedir}/src/main/resources/spec/user-api-v1.0.0.yaml</inputSpec>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/spec/user-profiles-api-v1.0.0.yaml
+                            </inputSpec>
                             <generatorName>spring</generatorName>
                             <configOptions>
-                                <artifactId>api-user</artifactId>
-                                <artifactDescription>TopJava Project. User API</artifactDescription>
-                                <apiPackage>ru.skubatko.dev.topjava.api.user.api</apiPackage>
-                                <modelPackage>ru.skubatko.dev.topjava.api.user.dto</modelPackage>
+                                <artifactId>api-user-profiles</artifactId>
+                                <artifactDescription>TopJava Project. User profiles API</artifactDescription>
+                                <apiPackage>${openapi.apiPackage}</apiPackage>
+                                <modelPackage>${openapi.modelPackage}</modelPackage>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>user=UserTO</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>UserTO=${openapi.modelPackage}.UserTO</importMapping>
+                            </importMappings>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>user-votes-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configurationFile>
+                                ${project.basedir}/src/main/resources/openapi-generator-config.json
+                            </configurationFile>
+                            <ignoreFileOverride>
+                                ${project.basedir}/src/main/resources/.openapi-generator-ignore
+                            </ignoreFileOverride>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/spec/user-votes-api-v1.0.0.yaml
+                            </inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <artifactId>api-user-votes</artifactId>
+                                <artifactDescription>TopJava Project. User votes API</artifactDescription>
+                                <apiPackage>${openapi.apiPackage}</apiPackage>
+                                <modelPackage>${openapi.modelPackage}</modelPackage>
                             </configOptions>
                             <typeMappings>
                                 <typeMapping>time=LocalTime</typeMapping>

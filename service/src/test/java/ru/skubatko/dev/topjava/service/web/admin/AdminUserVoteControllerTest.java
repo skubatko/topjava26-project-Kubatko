@@ -1,4 +1,4 @@
-package ru.skubatko.dev.topjava.service.web.user;
+package ru.skubatko.dev.topjava.service.web.admin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +13,15 @@ import ru.skubatko.dev.topjava.service.model.User;
 import ru.skubatko.dev.topjava.service.repository.UserRepository;
 import ru.skubatko.dev.topjava.service.web.AbstractControllerTest;
 import ru.skubatko.dev.topjava.service.web.GlobalExceptionHandler;
-import ru.skubatko.dev.topjava.service.web.admin.AdminUserController;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static ru.skubatko.dev.topjava.service.web.user.UserTestData.*;
+import static ru.skubatko.dev.topjava.service.web.admin.UserTestData.*;
 
-class AdminUserControllerTest extends AbstractControllerTest {
+class AdminUserVoteControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = AdminUserController.REST_URL + '/';
 

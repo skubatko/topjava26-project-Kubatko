@@ -7,9 +7,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import ru.skubatko.dev.topjava.api.admin.api.restaurants.AdminRestaurantApi;
-import ru.skubatko.dev.topjava.api.admin.dto.restaurants.RestaurantTO;
-import ru.skubatko.dev.topjava.service.mappers.MapStructMapper;
+import ru.skubatko.dev.topjava.api.api.AdminRestaurantApi;
+import ru.skubatko.dev.topjava.api.model.RestaurantTO;
+import ru.skubatko.dev.topjava.service.mapper.RestaurantMapper;
 import ru.skubatko.dev.topjava.service.repository.RestaurantRepository;
 
 import javax.validation.constraints.Max;
@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminRestaurantController implements AdminRestaurantApi {
 
-    private final MapStructMapper mapper;
+    private final RestaurantMapper mapper;
     private final RestaurantRepository repository;
 
     @Override
@@ -39,13 +39,13 @@ public class AdminRestaurantController implements AdminRestaurantApi {
             @Min(0) @Max(2147483647) @ApiParam(value = "Идентификатор ресторана", required = true)
             @PathVariable("restaurantId") Integer restaurantId) {
         log.info("get");
-        return ResponseEntity.ok(mapper.restaurantToDto(repository.findById(restaurantId).orElseThrow()));
+        return ResponseEntity.ok(mapper.toDto(repository.findById(restaurantId).orElseThrow()));
     }
 
     @Override
     public ResponseEntity<List<RestaurantTO>> getAll() {
         log.info("getAll");
-        return ResponseEntity.ok(mapper.restaurantsToDtoList(repository.findAll(Sort.by(Sort.Direction.ASC, "name"))));
+        return ResponseEntity.ok(mapper.toDtoList(repository.findAll(Sort.by(Sort.Direction.ASC, "name"))));
     }
 
     @Override

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.skubatko.dev.topjava.api.user.dto.VoteTO;
+import ru.skubatko.dev.topjava.api.model.VoteTO;
 import ru.skubatko.dev.topjava.service.config.AppProps;
 import ru.skubatko.dev.topjava.service.model.Restaurant;
 import ru.skubatko.dev.topjava.service.model.User;
@@ -20,7 +20,6 @@ import java.time.LocalTime;
 @Service
 @RequiredArgsConstructor
 public class VoteService {
-
     private final VoteRepository voteRepository;
     private final RestaurantRepository restaurantRepository;
     private final AppProps appProps;
