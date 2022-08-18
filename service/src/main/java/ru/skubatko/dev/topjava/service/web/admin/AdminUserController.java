@@ -3,7 +3,6 @@ package ru.skubatko.dev.topjava.service.web.admin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.skubatko.dev.topjava.api.api.AdminUserApi;
@@ -34,7 +33,6 @@ public class AdminUserController extends AbstractUserController implements Admin
     }
 
     @Override
-    @GetMapping("/by-email")
     public ResponseEntity<UserTO> getByEmail(String email) {
         log.info("getByEmail {}", email);
         return ResponseEntity.ok(service.getByEmail(email));

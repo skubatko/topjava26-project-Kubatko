@@ -13,7 +13,7 @@ import java.util.List;
 
 public class UserTestData {
     public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered", "password");
-    public static final MatcherFactory.Matcher<UserTO> USER_TO_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(UserTO.class, "registered", "password");
+    public static final MatcherFactory.Matcher<UserTO> USER_TO_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(UserTO.class, "password", "roles");
 
     public static final int USER_ID = 1;
     public static final int ADMIN_ID = 2;
@@ -22,7 +22,7 @@ public class UserTestData {
     public static final String ADMIN_MAIL = "admin@gmail.com";
 
     public static final User user = new User(USER_ID, "User", USER_MAIL, "password", Role.USER);
-    public static final User admin = new User(ADMIN_ID, "Admin", ADMIN_MAIL, "admin", Role.ADMIN, Role.USER);
+    public static final User admin = new User(ADMIN_ID, "Admin", ADMIN_MAIL, "admin", Role.USER, Role.ADMIN);
 
     public static User getNew() {
         return new User(null, "New", "new@gmail.com", "newPass", false, new Date(), Collections.singleton(Role.USER));
@@ -42,7 +42,7 @@ public class UserTestData {
                 .enabled(true).roles(List.of(new RoleTO().role("ROLE_USER")));
     }
 
-    public static String jsonWithPassword(User user, String passw) {
+    public static String jsonWithPassword(UserTO user, String passw) {
         return JsonUtil.writeAdditionProps(user, "password", passw);
     }
 }
