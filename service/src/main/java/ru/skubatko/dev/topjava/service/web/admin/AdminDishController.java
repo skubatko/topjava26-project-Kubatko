@@ -6,8 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.skubatko.dev.topjava.api.api.AdminDishApi;
 import ru.skubatko.dev.topjava.api.model.DishTO;
-import ru.skubatko.dev.topjava.service.mapper.RestaurantMapper;
-import ru.skubatko.dev.topjava.service.repository.RestaurantRepository;
+import ru.skubatko.dev.topjava.service.service.DishService;
 
 import java.util.List;
 
@@ -16,31 +15,33 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminDishController implements AdminDishApi {
 
-    private final RestaurantMapper mapper;
-    private final RestaurantRepository repository;
-
-    @Override
-    public ResponseEntity<Void> create(DishTO dishTO) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<Void> delete(Integer id) {
-        return null;
-    }
+    private final DishService service;
 
     @Override
     public ResponseEntity<DishTO> get(Integer id) {
-        return null;
+        return ResponseEntity.ok(service.get(id));
     }
 
     @Override
     public ResponseEntity<List<DishTO>> getAll() {
-        return null;
+        return ResponseEntity.ok(service.getAll());
+    }
+
+    @Override
+    public ResponseEntity<Void> create(DishTO dishTO) {
+        service.create(dishTO);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
     public ResponseEntity<Void> update(Integer id, DishTO dishTO) {
-        return null;
+        service.update(id, dishTO);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> delete(Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
