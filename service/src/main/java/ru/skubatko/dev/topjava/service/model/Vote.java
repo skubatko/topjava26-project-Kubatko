@@ -1,9 +1,11 @@
 package ru.skubatko.dev.topjava.service.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import ru.skubatko.dev.topjava.service.HasId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,15 +14,10 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @ToString(callSuper = true)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "day"}, name = "votes_unique_user_day_idx")})
 public class Vote extends BaseEntity implements HasId {
-    public Vote(User user, Restaurant restaurant) {
-        this.day = new Date();
-        this.user = user;
-        this.restaurant = restaurant;
-    }
 
     @Column(name = "day", nullable = false)
     @NotNull
@@ -37,6 +34,12 @@ public class Vote extends BaseEntity implements HasId {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Restaurant restaurant;
+
+    public Vote(User user, Restaurant restaurant) {
+        this.day = new Date();
+        this.user = user;
+        this.restaurant = restaurant;
+    }
 
     public Vote(Vote v) {
         this(v.id, v.day, v.user, v.restaurant);

@@ -31,7 +31,7 @@ public class DishService {
 
     public List<DishTO> getAll() {
         log.info("getAll");
-        return mapper.toDtoList(repository.findAll(Sort.by(Sort.Direction.ASC, "name", "email")));
+        return mapper.toDtoList(repository.findAll(Sort.by(Sort.Direction.ASC, "name")));
     }
 
     @Transactional

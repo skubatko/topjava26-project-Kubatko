@@ -1,4 +1,4 @@
-package ru.skubatko.dev.topjava.service;
+package ru.skubatko.dev.topjava.service.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.util.Assert;

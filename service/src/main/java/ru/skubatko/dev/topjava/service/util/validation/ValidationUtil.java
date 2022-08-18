@@ -3,8 +3,8 @@ package ru.skubatko.dev.topjava.service.util.validation;
 import lombok.experimental.UtilityClass;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
-import ru.skubatko.dev.topjava.service.HasId;
 import ru.skubatko.dev.topjava.service.error.IllegalRequestDataException;
+import ru.skubatko.dev.topjava.service.model.HasId;
 
 @UtilityClass
 public class ValidationUtil {

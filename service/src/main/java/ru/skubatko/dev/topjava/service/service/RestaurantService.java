@@ -31,7 +31,7 @@ public class RestaurantService {
 
     public List<RestaurantTO> getAll() {
         log.info("getAll");
-        return mapper.toDtoList(repository.findAll(Sort.by(Sort.Direction.ASC, "name", "email")));
+        return mapper.toDtoList(repository.findAll(Sort.by(Sort.Direction.ASC, "name")));
     }
 
     @Transactional

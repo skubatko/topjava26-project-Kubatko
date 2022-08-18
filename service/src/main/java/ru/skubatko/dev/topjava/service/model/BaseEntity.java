@@ -6,15 +6,13 @@ import lombok.*;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.util.ProxyUtils;
 import org.springframework.util.Assert;
-import ru.skubatko.dev.topjava.service.HasId;
 
 import javax.persistence.*;
 
-@MappedSuperclass
-//  https://stackoverflow.com/a/6084701/548473
-@Access(AccessType.FIELD)
 @Getter
 @Setter
+@MappedSuperclass
+@Access(AccessType.FIELD)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class BaseEntity implements Persistable<Integer>, HasId {

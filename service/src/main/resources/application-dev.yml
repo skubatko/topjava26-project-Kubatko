@@ -1,12 +1,22 @@
 server:
   port: 8081
 
+spring:
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        use_sql_comments: false
+
 logging:
   charset.console: UTF-8
   pattern.console: '%white([%thread]) %highlight(%-5level) %cyan(%logger{5}) %magenta([%file:%-4L]) - %msg%n'
   level:
     root: INFO
     org.springframework.web: INFO
+    org.springframework.web.filter.CommonsRequestLoggingFilter: INFO
+    org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: INFO
     org.springframework.security: INFO
     org.springframework.orm.jpa: INFO
     org.hibernate: INFO

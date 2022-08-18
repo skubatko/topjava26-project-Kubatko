@@ -8,7 +8,6 @@ import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.util.CollectionUtils;
-import ru.skubatko.dev.topjava.service.HasIdAndEmail;
 import ru.skubatko.dev.topjava.service.util.validation.NoHtml;
 
 import javax.persistence.*;
@@ -24,12 +23,13 @@ import java.util.EnumSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "users")
 @ToString(callSuper = true, exclude = {"password"})
 public class User extends NamedEntity implements HasIdAndEmail, Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
 
