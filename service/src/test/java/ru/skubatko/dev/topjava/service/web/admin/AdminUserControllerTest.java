@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.skubatko.dev.topjava.service.web.admin.UserTestData.*;
 
-class AdminUserVoteControllerTest extends AbstractControllerTest {
+class AdminUserControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = AdminUserController.REST_URL + '/';
 

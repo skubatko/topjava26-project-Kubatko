@@ -1,4 +1,4 @@
-package ru.skubatko.dev.topjava.service.web.admin;
+package ru.skubatko.dev.topjava.service.web.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +18,11 @@ import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static ru.skubatko.dev.topjava.service.web.admin.ProfileController.REST_URL;
 import static ru.skubatko.dev.topjava.service.web.admin.UserTestData.*;
+import static ru.skubatko.dev.topjava.service.web.user.UserProfileController.REST_URL;
 
-class ProfileControllerTest extends AbstractControllerTest {
+class UserProfileControllerTest extends AbstractControllerTest {
+
     @Autowired
     private UserRepository userRepository;
 

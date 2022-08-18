@@ -17,9 +17,10 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class AdminUserController extends AbstractUserController implements AdminUserApi {
+
     private final UserService service;
 
-    static final String REST_URL = "/api/admin/users";
+    static final String REST_URL = "/api/admin/v1/users";
 
     @Override
     public ResponseEntity<UserTO> get(Integer id) {
@@ -41,7 +42,7 @@ public class AdminUserController extends AbstractUserController implements Admin
 
     @Override
     public ResponseEntity<Void> enable(Integer id, Boolean enabled) {
-        log.info(enabled ? "enable {}" : "disable {}", id);
+        log.info(Boolean.TRUE.equals(enabled) ? "enable {}" : "disable {}", id);
         service.enable(id, enabled);
         return ResponseEntity.noContent().build();
     }

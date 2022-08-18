@@ -13,6 +13,7 @@ import ru.skubatko.dev.topjava.service.mapper.UserMapper;
 import ru.skubatko.dev.topjava.service.model.User;
 import ru.skubatko.dev.topjava.service.repository.UserRepository;
 import ru.skubatko.dev.topjava.service.util.UserUtil;
+import ru.skubatko.dev.topjava.service.web.SecurityUtil;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -34,6 +35,11 @@ public class UserService {
         return mapper.toDto(repository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
+    public UserTO getAuth() {
+        log.info("getAuth");
+        return mapper.toDto(SecurityUtil.authUser());
+    }
+
     @Cacheable
     public List<UserTO> getAll() {
         log.info("getAll");
@@ -48,7 +54,7 @@ public class UserService {
     @Transactional
     @CacheEvict(allEntries = true)
     public void enable(Integer id, Boolean enabled) {
-        log.info(enabled ? "enable {}" : "disable {}", id);
+        log.info(Boolean.TRUE.equals(enabled) ? "enable {}" : "disable {}", id);
         User user = repository.getById(id);
         user.setEnabled(enabled);
     }
@@ -71,6 +77,15 @@ public class UserService {
         prepareAndSave(user);
     }
 
+    @Transactional
+    @CacheEvict(allEntries = true)
+    public void updateAuth(UserTO dto) {
+        log.info("updateAuth {}", dto);
+        User user = mapper.toEntity(dto);
+        assureIdConsistent(user, SecurityUtil.authId());
+        prepareAndSave(user);
+    }
+
     private User prepareAndSave(User user) {
         return repository.save(UserUtil.prepareToSave(user));
     }
@@ -80,5 +95,12 @@ public class UserService {
     public void delete(Integer id) {
         log.info("delete {}", id);
         repository.deleteExisted(id);
+    }
+
+    @Transactional
+    @CacheEvict(value = "users", allEntries = true)
+    public void deleteAuth() {
+        log.info("deleteAuth");
+        repository.deleteExisted(SecurityUtil.authId());
     }
 }
