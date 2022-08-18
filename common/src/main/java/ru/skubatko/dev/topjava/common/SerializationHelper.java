@@ -2,6 +2,7 @@ package ru.skubatko.dev.topjava.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.experimental.UtilityClass;
@@ -35,6 +36,7 @@ public class SerializationHelper {
                 .build();
         jsonObjectMapper.registerModule(new JavaTimeModule());
         jsonObjectMapper.registerModule(new Jdk8Module());
+        jsonObjectMapper.registerModule(new Hibernate5Module());
         jsonObjectMapper.registerModule(new Swagger2JacksonModule());
         jsonObjectMapper.setPropertyNamingStrategy(LOWER_CAMEL_CASE);
         return jsonObjectMapper;

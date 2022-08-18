@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import ru.skubatko.dev.topjava.service.HasIdAndEmail;
+import ru.skubatko.dev.topjava.api.model.UserTO;
 import ru.skubatko.dev.topjava.service.repository.UserRepository;
 import ru.skubatko.dev.topjava.service.web.GlobalExceptionHandler;
 import ru.skubatko.dev.topjava.service.web.SecurityUtil;
@@ -22,20 +22,20 @@ public class UniqueMailValidator implements Validator {
 
     @Override
     public boolean supports(@NonNull Class<?> clazz) {
-        return HasIdAndEmail.class.isAssignableFrom(clazz);
+        return UserTO.class.isAssignableFrom(clazz);
     }
 
     @Override
     public void validate(@NonNull Object target, @NonNull Errors errors) {
-        HasIdAndEmail user = ((HasIdAndEmail) target);
+        UserTO user = ((UserTO) target);
         if (StringUtils.hasText(user.getEmail())) {
             repository.getByEmail(user.getEmail().toLowerCase())
                     .ifPresent(dbUser -> {
                         if (request.getMethod().equals("PUT")) {  // UPDATE
                             int dbId = dbUser.id();
 
-                            // it is ok, if update ourself
-                            if (user.getId() != null && dbId == user.id()) return;
+                            // it is ok, if update ourselves
+                            if (user.getId() != null && dbId == user.getId()) return;
 
                             // Workaround for update with user.id=null in request body
                             // ValidationUtil.assureIdConsistent called after this validation

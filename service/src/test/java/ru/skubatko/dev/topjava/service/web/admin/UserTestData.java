@@ -1,5 +1,7 @@
 package ru.skubatko.dev.topjava.service.web.admin;
 
+import ru.skubatko.dev.topjava.api.model.RoleTO;
+import ru.skubatko.dev.topjava.api.model.UserTO;
 import ru.skubatko.dev.topjava.service.model.Role;
 import ru.skubatko.dev.topjava.service.model.User;
 import ru.skubatko.dev.topjava.service.util.JsonUtil;
@@ -7,9 +9,11 @@ import ru.skubatko.dev.topjava.service.web.MatcherFactory;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class UserTestData {
     public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered", "password");
+    public static final MatcherFactory.Matcher<UserTO> USER_TO_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(UserTO.class, "registered", "password");
 
     public static final int USER_ID = 1;
     public static final int ADMIN_ID = 2;
@@ -24,8 +28,18 @@ public class UserTestData {
         return new User(null, "New", "new@gmail.com", "newPass", false, new Date(), Collections.singleton(Role.USER));
     }
 
+    public static UserTO getNewTo() {
+        return new UserTO().name("newName").email("newemail@ya.ru").password("newPassword")
+                .enabled(true).roles(List.of(new RoleTO().role("ROLE_USER")));
+    }
+
     public static User getUpdated() {
         return new User(USER_ID, "UpdatedName", USER_MAIL, "newPass", false, new Date(), Collections.singleton(Role.ADMIN));
+    }
+
+    public static UserTO getUpdatedTo() {
+        return new UserTO().name("newName").email(USER_MAIL).password("newPassword")
+                .enabled(true).roles(List.of(new RoleTO().role("ROLE_USER")));
     }
 
     public static String jsonWithPassword(User user, String passw) {

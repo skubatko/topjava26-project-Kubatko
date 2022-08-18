@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers("/api/admin/**").hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.POST, "/api/profile").anonymous()
+                .antMatchers(HttpMethod.POST, "/api/user/v1/profiles").anonymous()
                 .antMatchers(HttpMethod.GET, "/").anonymous()
                 .antMatchers("/api/**").authenticated()
                 .and().httpBasic()
