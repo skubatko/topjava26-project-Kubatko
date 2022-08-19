@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.skubatko.dev.topjava.api.api.AdminDishApi;
+import ru.skubatko.dev.topjava.api.model.DishCreateTO;
 import ru.skubatko.dev.topjava.api.model.DishTO;
 import ru.skubatko.dev.topjava.service.service.DishService;
 
@@ -28,8 +29,8 @@ public class AdminDishController implements AdminDishApi {
     }
 
     @Override
-    public ResponseEntity<Void> create(DishTO dishTO) {
-        service.create(dishTO);
+    public ResponseEntity<Void> create(DishCreateTO newDish) {
+        service.create(newDish);
         return ResponseEntity.noContent().build();
     }
 

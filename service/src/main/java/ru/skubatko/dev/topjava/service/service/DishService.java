@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.skubatko.dev.topjava.api.model.DishCreateTO;
 import ru.skubatko.dev.topjava.api.model.DishTO;
 import ru.skubatko.dev.topjava.service.mapper.DishMapper;
 import ru.skubatko.dev.topjava.service.model.Dish;
@@ -35,7 +36,7 @@ public class DishService {
     }
 
     @Transactional
-    public DishTO create(DishTO dto) {
+    public DishTO create(DishCreateTO dto) {
         log.info("create {}", dto);
         Dish dish = mapper.toEntity(dto);
         checkNew(dish);

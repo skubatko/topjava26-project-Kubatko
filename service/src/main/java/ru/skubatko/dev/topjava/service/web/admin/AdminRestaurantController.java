@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.skubatko.dev.topjava.api.api.AdminRestaurantApi;
+import ru.skubatko.dev.topjava.api.model.RestaurantCreateTO;
 import ru.skubatko.dev.topjava.api.model.RestaurantTO;
 import ru.skubatko.dev.topjava.service.service.RestaurantService;
 
@@ -28,8 +29,8 @@ public class AdminRestaurantController implements AdminRestaurantApi {
     }
 
     @Override
-    public ResponseEntity<Void> create(RestaurantTO restaurantTO) {
-        service.create(restaurantTO);
+    public ResponseEntity<Void> create(RestaurantCreateTO newRestaurant) {
+        service.create(newRestaurant);
         return ResponseEntity.noContent().build();
     }
 

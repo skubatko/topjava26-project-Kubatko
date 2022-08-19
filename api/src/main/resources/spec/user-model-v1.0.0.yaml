@@ -56,6 +56,38 @@ components:
             $ref: '#/components/schemas/RoleTO'
       required:
         - email
+    UserCreateTO:
+      title: UserCreateTO
+      type: object
+      description: Новый пользователь
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Имя
+        email:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Email
+        password:
+          type: string
+          minLength: 5
+          maxLength: 100
+          description: Пароль
+        enabled:
+          type: boolean
+          description: Признак активности
+        roles:
+          type: array
+          description: Роли
+          maxItems: 16
+          items:
+            $ref: '#/components/schemas/RoleTO'
+      required:
+        - email
     RoleTO:
       title: RoleTO
       type: object

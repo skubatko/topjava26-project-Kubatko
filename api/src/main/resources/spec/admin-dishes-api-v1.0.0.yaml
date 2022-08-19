@@ -44,7 +44,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DishTO'
+              $ref: '#/components/schemas/DishCreateTO'
         required: true
       responses:
         '201':
@@ -153,6 +153,19 @@ components:
           description: Название
       required:
         - id
+        - name
+    DishCreateTO:
+      title: DishCreateTO
+      type: object
+      description: Новое блюдо
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Название
+      required:
         - name
   parameters:
     id:

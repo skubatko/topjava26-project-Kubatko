@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.skubatko.dev.topjava.api.model.RestaurantCreateTO;
 import ru.skubatko.dev.topjava.api.model.RestaurantTO;
 import ru.skubatko.dev.topjava.service.mapper.RestaurantMapper;
 import ru.skubatko.dev.topjava.service.model.Restaurant;
@@ -35,7 +36,7 @@ public class RestaurantService {
     }
 
     @Transactional
-    public RestaurantTO create(RestaurantTO dto) {
+    public RestaurantTO create(RestaurantCreateTO dto) {
         log.info("create {}", dto);
         Restaurant restaurant = mapper.toEntity(dto);
         checkNew(restaurant);

@@ -44,7 +44,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MenuItemTO'
+              $ref: '#/components/schemas/MenuItemCreateTO'
         required: true
       responses:
         '201':
@@ -176,10 +176,9 @@ components:
           minimum: 1
           maximum: 2147483647
         day:
+          description: День
           type: string
-          minLength: 10
-          maxLength: 10
-          description: Дата
+          format: date
         price:
           type: integer
           description: Цена в копейках
@@ -204,6 +203,39 @@ components:
         - price
         - dishId
         - restaurantId
+    MenuItemCreateTO:
+      title: MenuItemCreateTO
+      type: object
+      description: Новая позиция меню
+      additionalProperties: false
+      properties:
+        day:
+          description: День
+          type: string
+          format: date
+        price:
+          type: integer
+          description: Цена в копейках
+          format: int32
+          minimum: 10000
+          maximum: 500000
+        dishId:
+          type: integer
+          description: Идентификатор блюда
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+        restaurantId:
+          type: integer
+          description: Идентификатор ресторана
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+      required:
+        - day
+        - price
+        - dishId
+        - restaurantId
   parameters:
     id:
       name: id
@@ -219,11 +251,10 @@ components:
       name: day
       description: День
       in: query
-      required: false
+      required: true
       schema:
         type: string
-        minLength: 10
-        maxLength: 10
+        format: date
     dishId:
       name: dishId
       description: Идентификатор блюда

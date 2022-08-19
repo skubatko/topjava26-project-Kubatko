@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.skubatko.dev.topjava.api.api.AdminUserApi;
+import ru.skubatko.dev.topjava.api.model.UserCreateTO;
 import ru.skubatko.dev.topjava.api.model.UserTO;
 import ru.skubatko.dev.topjava.service.service.UserService;
 
@@ -46,9 +47,9 @@ public class AdminUserController extends AbstractUserController implements Admin
     }
 
     @Override
-    public ResponseEntity<UserTO> create(UserTO user) {
-        log.info("create {}", user);
-        UserTO created = service.create(user);
+    public ResponseEntity<UserTO> create(UserCreateTO newUser) {
+        log.info("create {}", newUser);
+        UserTO created = service.create(newUser);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();

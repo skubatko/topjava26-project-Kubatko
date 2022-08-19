@@ -44,7 +44,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RestaurantTO'
+              $ref: '#/components/schemas/RestaurantCreateTO'
         required: true
       responses:
         '201':
@@ -153,6 +153,19 @@ components:
           description: Название
       required:
         - id
+        - name
+    RestaurantCreateTO:
+      title: RestaurantCreateTO
+      type: object
+      description: Новый ресторан
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Название
+      required:
         - name
   parameters:
     id:

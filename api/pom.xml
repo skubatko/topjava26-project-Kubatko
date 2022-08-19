@@ -130,6 +130,12 @@
                                 <apiPackage>${openapi.apiPackage}</apiPackage>
                                 <modelPackage>${openapi.modelPackage}</modelPackage>
                             </configOptions>
+                            <typeMappings>
+                                <typeMapping>date=LocalDate</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>LocalDate=java.time.LocalDate</importMapping>
+                            </importMappings>
                         </configuration>
                     </execution>
                     <execution>
@@ -180,9 +186,11 @@
                             </configOptions>
                             <typeMappings>
                                 <typeMapping>user=UserTO</typeMapping>
+                                <typeMapping>newUser=UserCreateTO</typeMapping>
                             </typeMappings>
                             <importMappings>
                                 <importMapping>UserTO=${openapi.modelPackage}.UserTO</importMapping>
+                                <importMapping>UserCreateTO=${openapi.modelPackage}.UserCreateTO</importMapping>
                             </importMappings>
                         </configuration>
                     </execution>
@@ -234,9 +242,11 @@
                             </configOptions>
                             <typeMappings>
                                 <typeMapping>user=UserTO</typeMapping>
+                                <typeMapping>newUser=UserCreateTO</typeMapping>
                             </typeMappings>
                             <importMappings>
                                 <importMapping>UserTO=${openapi.modelPackage}.UserTO</importMapping>
+                                <importMapping>UserCreateTO=${openapi.modelPackage}.UserCreateTO</importMapping>
                             </importMappings>
                         </configuration>
                     </execution>

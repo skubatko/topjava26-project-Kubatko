@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.skubatko.dev.topjava.api.api.UserProfileApi;
+import ru.skubatko.dev.topjava.api.model.UserCreateTO;
 import ru.skubatko.dev.topjava.api.model.UserTO;
 import ru.skubatko.dev.topjava.service.service.UserService;
 import ru.skubatko.dev.topjava.service.web.admin.AbstractUserController;
@@ -33,7 +34,7 @@ public class UserProfileController extends AbstractUserController implements Use
     }
 
     @Override
-    public ResponseEntity<UserTO> register(UserTO user) {
+    public ResponseEntity<UserTO> register(UserCreateTO user) {
         log.info("register {}", user);
         UserTO created = userService.create(user);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()

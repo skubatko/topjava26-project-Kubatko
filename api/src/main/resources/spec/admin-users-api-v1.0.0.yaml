@@ -48,7 +48,7 @@ paths:
           application/json:
             schema:
               type: string
-              format: user
+              format: newUser
         required: true
       responses:
         '201':

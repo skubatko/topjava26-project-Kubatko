@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -22,7 +22,7 @@ public class MenuItem extends BaseEntity implements HasId {
 
     @Column(name = "day", nullable = false)
     @NotNull
-    private Date day;
+    private LocalDate day;
 
     @Column(name = "price", nullable = false)
     @Range(min = 100_00, max = 5000_00)
@@ -44,7 +44,7 @@ public class MenuItem extends BaseEntity implements HasId {
         this(mi.id, mi.day, mi.price, mi.dish, mi.restaurant);
     }
 
-    public MenuItem(Integer id, Date day, int price, Dish dish, Restaurant restaurant) {
+    public MenuItem(Integer id, LocalDate day, int price, Dish dish, Restaurant restaurant) {
         super(id);
         this.day = day;
         this.price = price;

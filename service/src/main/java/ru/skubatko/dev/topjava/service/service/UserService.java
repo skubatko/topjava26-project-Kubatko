@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.skubatko.dev.topjava.api.model.UserCreateTO;
 import ru.skubatko.dev.topjava.api.model.UserTO;
 import ru.skubatko.dev.topjava.service.mapper.UserMapper;
 import ru.skubatko.dev.topjava.service.model.User;
@@ -61,7 +62,7 @@ public class UserService {
 
     @Transactional
     @CacheEvict(allEntries = true)
-    public UserTO create(UserTO dto) {
+    public UserTO create(UserCreateTO dto) {
         log.info("create {}", dto);
         User user = mapper.toEntity(dto);
         checkNew(user);
