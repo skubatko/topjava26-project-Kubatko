@@ -20,4 +20,4 @@ logging:
     org.springframework.security: INFO
     org.springframework.orm.jpa: INFO
     org.hibernate: INFO
-    ru.skubatko.dev: INFO
+    ru.skubatko.dev: TRACE

@@ -263,9 +263,11 @@
                                 <modelPackage>${openapi.modelPackage}</modelPackage>
                             </configOptions>
                             <typeMappings>
+                                <typeMapping>date=LocalDate</typeMapping>
                                 <typeMapping>time=LocalTime</typeMapping>
                             </typeMappings>
                             <importMappings>
+                                <importMapping>LocalDate=java.time.LocalDate</importMapping>
                                 <importMapping>LocalTime=java.time.LocalTime</importMapping>
                             </importMappings>
                         </configuration>

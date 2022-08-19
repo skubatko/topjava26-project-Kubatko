@@ -8,6 +8,32 @@ servers:
     description: LOCAL
 paths:
   /user/v1/votes:
+    get:
+      operationId: getDaily
+      summary: Get vote daily result
+      description: Получение итогов голосования за день
+      tags:
+        - userVote
+      parameters:
+        - $ref: '#/components/parameters/day'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 100000
+                items:
+                  $ref: '#/components/schemas/VoteResultTO'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access Denied
+        '500':
+          description: Internal Server Error
     post:
       operationId: vote
       summary: Daily lunch vote
@@ -21,8 +47,12 @@ paths:
               $ref: '#/components/schemas/VoteTO'
         required: true
       responses:
-        '204':
-          description: No Content
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoteStatusTO'
         '400':
           description: Bad Request
         '401':
@@ -32,6 +62,15 @@ paths:
         '500':
           description: Internal Server Error
 components:
+  parameters:
+    day:
+      name: day
+      description: День голосования
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date
   schemas:
     VoteTO:
       title: VoteTO
@@ -39,6 +78,10 @@ components:
       description: Голос за ресторан
       additionalProperties: false
       properties:
+        day:
+          description: День голосования
+          type: string
+          format: date
         restaurantId:
           type: integer
           description: Идентификатор ресторана
@@ -50,5 +93,38 @@ components:
           description: Временная метка голосования
           format: time
       required:
+        - day
         - restaurantId
         - votedAt
+    VoteResultTO:
+      title: VoteResultTO
+      type: array
+      description: Итоги голосования за день
+      additionalProperties: false
+      properties:
+        restaurantId:
+          type: integer
+          description: Идентификатор ресторана
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+        votes:
+          type: integer
+          description: Количество отданных голосов
+          format: int32
+          minimum: 0
+          maximum: 2147483647
+      required:
+        - restaurantId
+        - votes
+    VoteStatusTO:
+      title: VoteStatusTO
+      type: object
+      description: Статус голосования
+      additionalProperties: false
+      properties:
+        status:
+          type: string
+          description: Статус голосования
+      required:
+        - status

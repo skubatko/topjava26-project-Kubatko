@@ -9,7 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -21,7 +21,7 @@ public class Vote extends BaseEntity implements HasId {
 
     @Column(name = "day", nullable = false)
     @NotNull
-    private Date day;
+    private LocalDate day;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -35,8 +35,8 @@ public class Vote extends BaseEntity implements HasId {
     @NotNull
     private Restaurant restaurant;
 
-    public Vote(User user, Restaurant restaurant) {
-        this.day = new Date();
+    public Vote(LocalDate day, User user, Restaurant restaurant) {
+        this.day = day;
         this.user = user;
         this.restaurant = restaurant;
     }
@@ -45,7 +45,7 @@ public class Vote extends BaseEntity implements HasId {
         this(v.id, v.day, v.user, v.restaurant);
     }
 
-    public Vote(Integer id, Date day, User user, Restaurant restaurant) {
+    public Vote(Integer id, LocalDate day, User user, Restaurant restaurant) {
         super(id);
         this.day = day;
         this.user = user;
