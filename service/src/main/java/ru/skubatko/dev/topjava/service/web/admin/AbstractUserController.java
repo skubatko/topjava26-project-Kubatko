@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 @Slf4j
 public abstract class AbstractUserController {
     @Autowired
-    private UniqueMailValidator emailValidator;
+    private UniqueMailValidator uniqueMailValidator;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-        binder.addValidators(emailValidator);
+        binder.addValidators(uniqueMailValidator);
     }
 }

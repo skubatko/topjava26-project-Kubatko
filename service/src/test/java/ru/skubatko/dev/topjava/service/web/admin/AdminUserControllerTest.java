@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import ru.skubatko.dev.topjava.api.model.UserCreateTO;
 import ru.skubatko.dev.topjava.api.model.UserTO;
 import ru.skubatko.dev.topjava.service.mapper.UserMapper;
 import ru.skubatko.dev.topjava.service.model.Role;
@@ -141,7 +142,7 @@ class AdminUserControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
     void createWithLocation() throws Exception {
-        UserTO newUser = mapper.toDto(getNew());
+        UserCreateTO newUser = getCreateTo();
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonWithPassword(newUser, "newPass")))
@@ -149,10 +150,10 @@ class AdminUserControllerTest extends AbstractControllerTest {
 
         UserTO created = USER_TO_MATCHER.readFromJson(action);
         int newId = created.getId();
-        newUser.setId(newId);
-        USER_TO_MATCHER.assertMatch(created, newUser);
+        UserTO expected = getUserTo().id(newId);
+        USER_TO_MATCHER.assertMatch(created, expected);
         assertThat(created.getRoles()).containsExactlyInAnyOrderElementsOf(newUser.getRoles());
-        USER_MATCHER.assertMatch(repository.getById(newId), mapper.toEntity(newUser));
+        USER_MATCHER.assertMatch(repository.getById(newId), mapper.toEntity(expected));
     }
 
     @Test

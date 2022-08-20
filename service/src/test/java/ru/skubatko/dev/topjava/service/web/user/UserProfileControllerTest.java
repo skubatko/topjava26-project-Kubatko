@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import ru.skubatko.dev.topjava.api.model.UserCreateTO;
 import ru.skubatko.dev.topjava.api.model.UserTO;
 import ru.skubatko.dev.topjava.service.mapper.UserMapper;
 import ru.skubatko.dev.topjava.service.model.User;
@@ -23,7 +24,6 @@ import static ru.skubatko.dev.topjava.service.web.admin.UserTestData.*;
 import static ru.skubatko.dev.topjava.service.web.user.UserProfileController.REST_URL;
 
 class UserProfileControllerTest extends AbstractControllerTest {
-
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -54,7 +54,7 @@ class UserProfileControllerTest extends AbstractControllerTest {
 
     @Test
     void register() throws Exception {
-        UserTO newTo = getNewTo();
+        UserCreateTO newTo = getCreateTo();
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(newTo)))
@@ -63,9 +63,9 @@ class UserProfileControllerTest extends AbstractControllerTest {
 
         UserTO created = USER_TO_MATCHER.readFromJson(action);
         int newId = created.getId();
-        newTo.setId(newId);
-        USER_TO_MATCHER.assertMatch(created, newTo);
-        USER_MATCHER.assertMatch(userRepository.getById(newId), userMapper.toEntity(newTo));
+        UserTO expected = getUserTo().id(newId);
+        USER_TO_MATCHER.assertMatch(created, expected);
+        USER_MATCHER.assertMatch(userRepository.getById(newId), userMapper.toEntity(expected));
     }
 
     @Test
@@ -104,7 +104,7 @@ class UserProfileControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = USER_MAIL)
     void updateDuplicate() throws Exception {
-        UserTO updatedTo = new UserTO().name("newName").email(ADMIN_MAIL).password("newPassword");
+        UserTO updatedTo = getUpdatedTo().email(ADMIN_MAIL);
         perform(MockMvcRequestBuilders.put(REST_URL).contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updatedTo)))
                 .andDo(print())

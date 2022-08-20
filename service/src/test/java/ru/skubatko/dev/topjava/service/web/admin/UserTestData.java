@@ -1,6 +1,7 @@
 package ru.skubatko.dev.topjava.service.web.admin;
 
 import ru.skubatko.dev.topjava.api.model.RoleTO;
+import ru.skubatko.dev.topjava.api.model.UserCreateTO;
 import ru.skubatko.dev.topjava.api.model.UserTO;
 import ru.skubatko.dev.topjava.service.model.Role;
 import ru.skubatko.dev.topjava.service.model.User;
@@ -24,12 +25,13 @@ public class UserTestData {
     public static final User user = new User(USER_ID, "User", USER_MAIL, "password", Role.USER);
     public static final User admin = new User(ADMIN_ID, "Admin", ADMIN_MAIL, "admin", Role.USER, Role.ADMIN);
 
-    public static User getNew() {
-        return new User(null, "New", "new@gmail.com", "newPass", false, new Date(), Collections.singleton(Role.USER));
+    public static UserTO getUserTo() {
+        return new UserTO().name("newName").email("newemail@ya.ru").password("newPassword")
+                .enabled(true).roles(List.of(new RoleTO().role("ROLE_USER")));
     }
 
-    public static UserTO getNewTo() {
-        return new UserTO().name("newName").email("newemail@ya.ru").password("newPassword")
+    public static UserCreateTO getCreateTo() {
+        return new UserCreateTO().name("newName").email("newemail@ya.ru").password("newPassword")
                 .enabled(true).roles(List.of(new RoleTO().role("ROLE_USER")));
     }
 
@@ -38,11 +40,15 @@ public class UserTestData {
     }
 
     public static UserTO getUpdatedTo() {
-        return new UserTO().name("newName").email(USER_MAIL).password("newPassword")
+        return new UserTO().id(USER_ID).name("newName").email(USER_MAIL).password("newPassword")
                 .enabled(true).roles(List.of(new RoleTO().role("ROLE_USER")));
     }
 
-    public static String jsonWithPassword(UserTO user, String passw) {
-        return JsonUtil.writeAdditionProps(user, "password", passw);
+    public static String jsonWithPassword(UserCreateTO user, String password) {
+        return JsonUtil.writeAdditionProps(user, "password", password);
+    }
+
+    public static String jsonWithPassword(UserTO user, String password) {
+        return JsonUtil.writeAdditionProps(user, "password", password);
     }
 }
