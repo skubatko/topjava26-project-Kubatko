@@ -84,13 +84,14 @@ java -jar target/topjava26-project.jar --spring.profiles.active=dev
 
 ```bash
 curl -s -i -X 'POST' \
-'http://localhost:8080/api/user/v1/profiles' \
+http://localhost:8080/api/user/v1/profiles \
 -H 'Content-Type: application/json' \
 -d '{
-"name": "New User",
-"email": "test@mail.ru",
-"password": "test-password"
-}'
+"name":"New User",
+"email":"test@mail.ru",
+"password":"test-password",
+"enabled": true,
+"roles": [{"role":"ROLE_USER"}]}'
 ```
 
 ---
@@ -105,6 +106,29 @@ curl -s -i -X 'POST' \
 curl -s http://localhost:8080/api/user/v1/profiles --user test@mail.ru:test-password
 ```
 
+##### update Profile
+
+```bash
+curl -s -X 'PUT' \
+http://localhost:8080/api/user/v1/profiles \
+-H 'Content-Type: application/json' \
+-d '{
+"id": 4,
+"name":"updatedUser",
+"email":"test@mail.ru",
+"password":"test-password",
+"enabled": true,
+"roles": [{"role":"ROLE_ADMIN"},{"role":"ROLE_USER"}]
+}' \
+--user test@mail.ru:test-password
+```
+
+##### delete Profile
+
+```bash
+curl -s -X DELETE http://localhost:8080/api/user/v1/profiles --user test@mail.ru:test-password
+```
+
 ##### Votes
 
 ###### get Daily Votes
@@ -115,14 +139,30 @@ curl -s http://localhost:8080/api/user/v1/votes?day=2022-05-15 --user user@yande
 
 ###### vote
 
+Success
+
 ```bash
-curl -s -i -X 'POST' \
-'http://localhost:8080/api/user/v1/votes' \
+curl -s -X 'POST' \
+http://localhost:8080/api/user/v1/votes \
 -H 'Content-Type: application/json' \
 -d '{
-"day": "2022-05-15",
+"day":"2022-05-15",
 "restaurantId": 2,
-"votedAt": "10:00"
+"votedAt":"10:00"
+}' \
+--user guest@mail.ru:guest
+```
+
+Too late
+
+```bash
+curl -s -X 'POST' \
+http://localhost:8080/api/user/v1/votes \
+-H 'Content-Type: application/json' \
+-d '{
+"day":"2022-05-15",
+"restaurantId": 2,
+"votedAt":"11:00"
 }' \
 --user guest@mail.ru:guest
 ```
@@ -145,6 +185,55 @@ curl -s http://localhost:8080/api/admin/v1/users --user admin@gmail.com:admin
 curl -s http://localhost:8080/api/admin/v1/users/1 --user admin@gmail.com:admin
 ```
 
+##### validate with Error
+
+```bash
+curl -s -X POST -d '{}' -H 'Content-Type: application/json' http://localhost:8080/api/admin/v1/users --user admin@gmail.com:admin
+```
+
+```bash
+curl -s -X POST -d '{"email":"guest@mail.ru"}' -H 'Content-Type: application/json' http://localhost:8080/api/admin/v1/users --user admin@gmail.com:admin
+```
+
+##### create User
+
+```bash
+curl -s -X 'POST' \
+http://localhost:8080/api/admin/v1/users \
+-H 'Content-Type: application/json' \
+-d '{
+"name":"New User",
+"email":"new@gmail.ru",
+"password":"new-password",
+"enabled": true,
+"roles": [{"role":"ROLE_ADMIN"},{"role":"ROLE_USER"}]
+}' \
+--user admin@gmail.com:admin
+```
+
+##### update User
+
+```bash
+curl -s -X 'PUT' \
+http://localhost:8080/api/admin/v1/users/5 \
+-H 'Content-Type: application/json' \
+-d '{
+"id": 5,
+"name":"updatedUser",
+"email":"updated@gmail.ru",
+"password":"updated-password",
+"enabled": true,
+"roles": [{"role":"ROLE_ADMIN"},{"role":"ROLE_USER"}]
+}' \
+--user admin@gmail.com:admin
+```
+
+##### delete User
+
+```bash
+curl -s -X DELETE http://localhost:8080/api/admin/v1/users/5 --user admin@gmail.com:admin
+```
+
 ##### Dishes
 
 ##### get All Dishes
@@ -162,76 +251,126 @@ curl -s http://localhost:8080/api/admin/v1/dishes/1 --user admin@gmail.com:admin
 ##### create Dish
 
 ```bash
-curl -s -i -X 'POST' \
-'http://localhost:8080/api/admin/v1/dishes' \
+curl -s -X 'POST' \
+http://localhost:8080/api/admin/v1/dishes \
 -H 'Content-Type: application/json' \
 -d '{
-"name": "newDish"
+"name":"newDish"
 }' \
 --user admin@gmail.com:admin
 ```
 
-##### update Meals
+##### update Dish
 
 ```bash
-curl -s -X PUT -d '{"dateTime":"2020-01-30T07:00", "description":"Updated breakfast", "calories":200}' -H 'Content-Type: application/json' http://localhost:8080/topjava/rest/profile/meals/100003 --user user@yandex.ru:password
-```
-
-##### delete Meals
-
-```bash
-curl -s -X DELETE http://localhost:8080/topjava/rest/profile/meals/100002 --user user@yandex.ru:password
-```
-
-##### validate with Error
-
-```bash
-curl -s -X POST -d '{}' -H 'Content-Type: application/json' http://localhost:8080/topjava/rest/admin/users --user admin@gmail.com:admin
-```
-
-```bash
-curl -s -X PUT -d '{"dateTime":"2015-05-30T07:00"}' -H 'Content-Type: application/json' http://localhost:8080/topjava/rest/profile/meals/100003 --user user@yandex.ru:password
-```
-
-##### getAll
-
-```bash
-curl http://localhost:8080/api/v1/tests
-```
-
-##### get
-
-```bash
-curl http://localhost:8080/api/v1/tests/2d1ebc5b-7d27-4197-9cf0-e84451c5bba5
-```
-
-#### delete
-
-```bash
-curl -X DELETE http://localhost:8080/api/v1/tests/2d1ebc5b-7d27-4197-9cf0-e84451c5bba8
-```
-
-#### create
-
-```bash
-curl -X 'POST' \
-'http://localhost:8080/api/v1/tests' \
+curl -s -X 'PUT' \
+http://localhost:8080/api/admin/v1/dishes/2 \
 -H 'Content-Type: application/json' \
 -d '{
-"name": "newTestName",
-"documentId": "2d1ebc5b-7d27-4197-9cf0-e84451c5bba4"
-}'
+"id": 2,
+"name":"updatedDish"
+}' \
+--user admin@gmail.com:admin
 ```
 
-#### update
+##### delete Dish
 
 ```bash
-curl -X 'PUT' \
-'http://localhost:8080/api/v1/tests/2d1ebc5b-7d27-4197-9cf0-e84451c5bba6' \
+curl -s -X DELETE http://localhost:8080/api/admin/v1/dishes/3 --user admin@gmail.com:admin
+```
+
+##### Menu
+
+##### get All Menu items
+
+```bash
+curl -s http://localhost:8080/api/admin/v1/menu --user admin@gmail.com:admin
+```
+
+###### get Menu item 1
+
+```bash
+curl -s http://localhost:8080/api/admin/v1/menu/1 --user admin@gmail.com:admin
+```
+
+##### create Menu item
+
+```bash
+curl -s -X 'POST' \
+http://localhost:8080/api/admin/v1/menu \
 -H 'Content-Type: application/json' \
 -d '{
-"id": "2d1ebc5b-7d27-4197-9cf0-e84451c5bba6",
-"name": "string",
-"dictionaryValueId": "2d1ebc5b-7d27-4197-9cf0-e84451c5bba2"
-}'
+"day":"2022-05-17",
+"price": 150000,
+"dishId": 2,
+"restaurantId": 3
+}' \
+--user admin@gmail.com:admin
+```
+
+##### update Menu item
+
+```bash
+curl -s -X 'PUT' \
+http://localhost:8080/api/admin/v1/menu/2 \
+-H 'Content-Type: application/json' \
+-d '{
+"id": 2,
+"day":"2022-05-17",
+"price": 154000,
+"dishId": 1,
+"restaurantId": 3
+}' \
+--user admin@gmail.com:admin
+```
+
+##### delete Menu item
+
+```bash
+curl -s -X DELETE http://localhost:8080/api/admin/v1/menu/3 --user admin@gmail.com:admin
+```
+
+##### Restaurants
+
+##### get All Restaurants
+
+```bash
+curl -s http://localhost:8080/api/admin/v1/restaurants --user admin@gmail.com:admin
+```
+
+###### get Restaurant 1
+
+```bash
+curl -s http://localhost:8080/api/admin/v1/restaurants/1 --user admin@gmail.com:admin
+```
+
+##### create Restaurant
+
+```bash
+curl -s -X 'POST' \
+http://localhost:8080/api/admin/v1/restaurants \
+-H 'Content-Type: application/json' \
+-d '{
+"name":"newRestaurant"
+}' \
+--user admin@gmail.com:admin
+```
+
+##### update Restaurant
+
+```bash
+curl -s -X 'PUT' \
+http://localhost:8080/api/admin/v1/restaurants/2 \
+-H 'Content-Type: application/json' \
+-d '{
+"id": 2,
+"name":"updatedRestaurant"
+}' \
+--user admin@gmail.com:admin
+```
+
+##### delete Restaurant
+
+```bash
+curl -s -X DELETE http://localhost:8080/api/admin/v1/restaurants/3 --user admin@gmail.com:admin
 ```
