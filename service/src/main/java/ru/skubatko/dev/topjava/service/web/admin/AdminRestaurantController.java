@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.skubatko.dev.topjava.api.api.AdminRestaurantApi;
 import ru.skubatko.dev.topjava.api.model.RestaurantCreateTO;
 import ru.skubatko.dev.topjava.api.model.RestaurantTO;
 import ru.skubatko.dev.topjava.service.service.RestaurantService;
 
+import java.net.URI;
 import java.util.List;
 
 @Slf4j
@@ -17,6 +19,8 @@ import java.util.List;
 public class AdminRestaurantController implements AdminRestaurantApi {
 
     private final RestaurantService service;
+
+    static final String REST_URL = "/api/admin/v1/restaurants";
 
     @Override
     public ResponseEntity<RestaurantTO> get(Integer id) {
@@ -29,9 +33,13 @@ public class AdminRestaurantController implements AdminRestaurantApi {
     }
 
     @Override
-    public ResponseEntity<Void> create(RestaurantCreateTO newRestaurant) {
-        service.create(newRestaurant);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<RestaurantTO> create(RestaurantCreateTO newRestaurant) {
+        log.info("create {}", newRestaurant);
+        RestaurantTO created = service.create(newRestaurant);
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(created.getId()).toUri();
+        return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
     @Override

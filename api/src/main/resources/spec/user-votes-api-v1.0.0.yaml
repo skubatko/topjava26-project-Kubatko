@@ -7,7 +7,7 @@ servers:
   - url: 'http://localhost:8080'
     description: LOCAL
 paths:
-  /user/v1/votes:
+  /api/user/v1/votes:
     get:
       operationId: getDaily
       summary: Get vote daily result

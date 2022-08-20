@@ -1,0 +1,32 @@
+### getAll
+GET http://localhost:8080/api/v1/tests
+Accept: application/json
+
+### get
+GET http://localhost:8080/api/v1/tests/2d1ebc5b-7d27-4197-9cf0-e84451c5bba5
+Accept: application/json
+
+### delete
+DELETE http://localhost:8080/api/v1/tests/2d1ebc5b-7d27-4197-9cf0-e84451c5bba8
+Accept: application/json
+
+### create
+POST http://localhost:8080/api/v1/tests
+Content-Type: application/json
+
+{
+  "name": "newTestName",
+  "documentId": "2d1ebc5b-7d27-4197-9cf0-e84451c5bba4"
+}
+
+### update
+PUT http://localhost:8080/api/v1/tests/2d1ebc5b-7d27-4197-9cf0-e84451c5bba6
+Content-Type: application/json
+
+{
+  "id": "2d1ebc5b-7d27-4197-9cf0-e84451c5bba6",
+  "name": "string",
+  "dictionaryValueId": "2d1ebc5b-7d27-4197-9cf0-e84451c5bba2"
+}
+
+###

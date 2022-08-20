@@ -20,7 +20,7 @@ public class UserVoteController implements UserVoteApi {
 
     private final VoteService voteService;
 
-    static final String REST_URL = "/user/v1/votes";
+    static final String REST_URL = "/api/user/v1/votes";
 
     @Override
     public ResponseEntity<List<VoteResultTO>> getDaily(LocalDate day) {

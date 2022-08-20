@@ -1,4 +1,4 @@
-package ru.skubatko.dev.topjava.service.web.admin;
+package ru.skubatko.dev.topjava.service.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
@@ -9,8 +9,6 @@ import org.springframework.validation.Validator;
 import ru.skubatko.dev.topjava.api.model.UserCreateTO;
 import ru.skubatko.dev.topjava.api.model.UserTO;
 import ru.skubatko.dev.topjava.service.repository.UserRepository;
-import ru.skubatko.dev.topjava.service.web.GlobalExceptionHandler;
-import ru.skubatko.dev.topjava.service.web.SecurityUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
