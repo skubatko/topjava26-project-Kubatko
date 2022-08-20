@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.skubatko.dev.topjava.service.web.admin.UserTestData.*;
 
 class AdminUserControllerTest extends AbstractControllerTest {
-
     @Autowired
     private UserRepository repository;
     @Autowired
@@ -44,12 +43,14 @@ class AdminUserControllerTest extends AbstractControllerTest {
 
     private UserTO userTo;
     private UserTO adminTo;
+    private UserTO guestTo;
 
     @BeforeEach
     @SneakyThrows
     void setUp() {
         userTo = mapper.toDto(user);
         adminTo = mapper.toDto(admin);
+        guestTo = mapper.toDto(guest);
     }
 
     @Test
@@ -162,12 +163,14 @@ class AdminUserControllerTest extends AbstractControllerTest {
         ResultActions action = perform(MockMvcRequestBuilders.get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(USER_TO_MATCHER.contentJson(adminTo, userTo));
+                .andExpect(USER_TO_MATCHER.contentJson(adminTo, guestTo, userTo));
 
         List<UserTO> all = jsonObjectMapper.readValue(
-                action.andReturn().getResponse().getContentAsString(), new TypeReference<>() {});
+                action.andReturn().getResponse().getContentAsString(), new TypeReference<>() {
+                });
         assertThat(all.get(0).getRoles()).containsExactlyInAnyOrderElementsOf(adminTo.getRoles());
-        assertThat(all.get(1).getRoles()).containsExactlyInAnyOrderElementsOf(userTo.getRoles());
+        assertThat(all.get(1).getRoles()).containsExactlyInAnyOrderElementsOf(guestTo.getRoles());
+        assertThat(all.get(2).getRoles()).containsExactlyInAnyOrderElementsOf(userTo.getRoles());
     }
 
     @Test
