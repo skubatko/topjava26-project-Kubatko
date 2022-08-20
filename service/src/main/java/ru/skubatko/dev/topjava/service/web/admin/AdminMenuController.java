@@ -25,16 +25,19 @@ public class AdminMenuController implements AdminMenuApi {
 
     @Override
     public ResponseEntity<MenuItemTO> get(Integer id) {
+        log.info("get by id={}", id);
         return ResponseEntity.ok(service.get(id));
     }
 
     @Override
     public ResponseEntity<List<MenuItemTO>> getByParams(LocalDate day, Integer dishId, Integer restaurantId) {
+        log.info("getByParams day={}, dishId={}, restaurantId={}", day, dishId, restaurantId);
         return ResponseEntity.ok(service.getByParams(day, dishId, restaurantId));
     }
 
     @Override
     public ResponseEntity<List<MenuItemTO>> getAll() {
+        log.info("getAll");
         return ResponseEntity.ok(service.getAll());
     }
 
@@ -49,13 +52,15 @@ public class AdminMenuController implements AdminMenuApi {
     }
 
     @Override
-    public ResponseEntity<Void> update(Integer id, MenuItemTO menuItemTO) {
-        service.update(id, menuItemTO);
+    public ResponseEntity<Void> update(Integer id, MenuItemTO menuItem) {
+        log.info("update {} with id={}", menuItem, id);
+        service.update(id, menuItem);
         return ResponseEntity.noContent().build();
     }
 
     @Override
     public ResponseEntity<Void> delete(Integer id) {
+        log.info("delete by id={}", id);
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

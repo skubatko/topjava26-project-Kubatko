@@ -24,6 +24,7 @@ public class AdminUserController extends AbstractUserController implements Admin
 
     @Override
     public ResponseEntity<UserTO> get(Integer id) {
+        log.info("get by id={}", id);
         return ResponseEntity.ok(service.get(id));
     }
 
@@ -65,6 +66,7 @@ public class AdminUserController extends AbstractUserController implements Admin
 
     @Override
     public ResponseEntity<Void> delete(Integer id) {
+        log.info("delete by id={}", id);
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

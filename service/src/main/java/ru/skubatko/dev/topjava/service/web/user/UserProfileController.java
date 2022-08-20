@@ -24,13 +24,8 @@ public class UserProfileController extends AbstractUserController implements Use
 
     @Override
     public ResponseEntity<UserTO> get() {
+        log.info("get");
         return ResponseEntity.ok(userService.getAuth());
-    }
-
-    @Override
-    public ResponseEntity<Void> delete() {
-        userService.deleteAuth();
-        return ResponseEntity.noContent().build();
     }
 
     @Override
@@ -47,6 +42,13 @@ public class UserProfileController extends AbstractUserController implements Use
     public ResponseEntity<Void> update(UserTO user) {
         log.info("update {}", user);
         userService.updateAuth(user);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> delete() {
+        log.info("delete");
+        userService.deleteAuth();
         return ResponseEntity.noContent().build();
     }
 }

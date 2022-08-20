@@ -24,11 +24,13 @@ public class AdminRestaurantController implements AdminRestaurantApi {
 
     @Override
     public ResponseEntity<RestaurantTO> get(Integer id) {
+        log.info("get by id={}", id);
         return ResponseEntity.ok(service.get(id));
     }
 
     @Override
     public ResponseEntity<List<RestaurantTO>> getAll() {
+        log.info("getAll");
         return ResponseEntity.ok(service.getAll());
     }
 
@@ -43,13 +45,15 @@ public class AdminRestaurantController implements AdminRestaurantApi {
     }
 
     @Override
-    public ResponseEntity<Void> update(Integer id, RestaurantTO restaurantTO) {
-        service.update(id, restaurantTO);
+    public ResponseEntity<Void> update(Integer id, RestaurantTO restaurant) {
+        log.info("update {} with id={}", restaurant, id);
+        service.update(id, restaurant);
         return ResponseEntity.noContent().build();
     }
 
     @Override
     public ResponseEntity<Void> delete(Integer id) {
+        log.info("delete by id={}", id);
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

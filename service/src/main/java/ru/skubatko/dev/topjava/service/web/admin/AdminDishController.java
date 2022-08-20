@@ -24,11 +24,13 @@ public class AdminDishController implements AdminDishApi {
 
     @Override
     public ResponseEntity<DishTO> get(Integer id) {
+        log.info("get by id={}", id);
         return ResponseEntity.ok(service.get(id));
     }
 
     @Override
     public ResponseEntity<List<DishTO>> getAll() {
+        log.info("getAll");
         return ResponseEntity.ok(service.getAll());
     }
 
@@ -43,13 +45,15 @@ public class AdminDishController implements AdminDishApi {
     }
 
     @Override
-    public ResponseEntity<Void> update(Integer id, DishTO dishTO) {
-        service.update(id, dishTO);
+    public ResponseEntity<Void> update(Integer id, DishTO dish) {
+        log.info("update {} with id={}", dish, id);
+        service.update(id, dish);
         return ResponseEntity.noContent().build();
     }
 
     @Override
     public ResponseEntity<Void> delete(Integer id) {
+        log.info("delete by id={}", id);
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -24,11 +24,13 @@ public class UserVoteController implements UserVoteApi {
 
     @Override
     public ResponseEntity<List<VoteResultTO>> getDaily(LocalDate day) {
+        log.info("getDaily on {}", day);
         return ResponseEntity.ok(voteService.getDaily(day));
     }
 
     @Override
-    public ResponseEntity<VoteStatusTO> vote(VoteTO voteTO) {
-        return ResponseEntity.ok(voteService.vote(voteTO));
+    public ResponseEntity<VoteStatusTO> vote(VoteTO vote) {
+        log.info("vote with {}", vote);
+        return ResponseEntity.ok(voteService.vote(vote));
     }
 }
