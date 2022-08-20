@@ -1,0 +1,67 @@
+## Admin Dishes
+
+### getAll
+GET http://localhost:8080/api/admin/v1/dishes
+Authorization: Basic admin@gmail.com admin
+Accept: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not OK");
+});
+%}
+
+### get
+GET http://localhost:8080/api/admin/v1/dishes/1
+Authorization: Basic admin@gmail.com admin
+Accept: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not OK");
+});
+%}
+
+### create
+POST http://localhost:8080/api/admin/v1/dishes
+Authorization: Basic admin@gmail.com admin
+Content-Type: application/json
+
+{
+  "name": "newDish"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 201, "Response status is not Created");
+});
+%}
+
+### update
+PUT http://localhost:8080/api/admin/v1/dishes/2
+Authorization: Basic admin@gmail.com admin
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "updatedDish"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not NoContent");
+});
+%}
+
+### delete
+DELETE http://localhost:8080/api/admin/v1/dishes/3
+Authorization: Basic admin@gmail.com admin
+Accept: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not NoContent");
+});
+%}
+
+###

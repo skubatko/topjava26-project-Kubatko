@@ -76,7 +76,7 @@ java -jar target/topjava26-project.jar --spring.profiles.active=dev
 
 ### IDEA
 
-Набор тестовых запросов находится в файле [tests.http](rest/tests.http).
+Набор тестовых запросов находится в каталоге [rest](rest).
 
 ### Примеры curl команд
 

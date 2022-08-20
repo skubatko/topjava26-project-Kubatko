@@ -1,0 +1,73 @@
+## Admin Menu
+
+### getAll
+GET http://localhost:8080/api/admin/v1/menu
+Authorization: Basic admin@gmail.com admin
+Accept: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not OK");
+});
+%}
+
+### get
+GET http://localhost:8080/api/admin/v1/menu/1
+Authorization: Basic admin@gmail.com admin
+Accept: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not OK");
+});
+%}
+
+### create
+POST http://localhost:8080/api/admin/v1/menu
+Authorization: Basic admin@gmail.com admin
+Content-Type: application/json
+
+{
+  "day": "2022-05-17",
+  "price": 150000,
+  "dishId": 2,
+  "restaurantId": 3
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 201, "Response status is not Created");
+});
+%}
+
+### update
+PUT http://localhost:8080/api/admin/v1/menu/2
+Authorization: Basic admin@gmail.com admin
+Content-Type: application/json
+
+{
+  "id": 2,
+  "day": "2022-05-17",
+  "price": 154000,
+  "dishId": 1,
+  "restaurantId": 3
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not NoContent");
+});
+%}
+
+### delete
+DELETE http://localhost:8080/api/admin/v1/menu/3
+Authorization: Basic admin@gmail.com admin
+Accept: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not NoContent");
+});
+%}
+
+###

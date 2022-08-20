@@ -1,0 +1,48 @@
+## User Votes
+
+### get Daily
+GET http://localhost:8080/api/user/v1/votes?day=2022-05-15
+Authorization: Basic guest@mail.ru guest
+Accept: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not OK");
+});
+%}
+
+### vote with Success
+POST http://localhost:8080/api/user/v1/votes
+Authorization: Basic guest@mail.ru guest
+Content-Type: application/json
+
+{
+  "day": "2022-05-15",
+  "restaurantId": 2,
+  "votedAt": "10:00"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not OK");
+});
+%}
+
+### vote with Too late
+POST http://localhost:8080/api/user/v1/votes
+Authorization: Basic guest@mail.ru guest
+Content-Type: application/json
+
+{
+  "day": "2022-05-15",
+  "restaurantId": 2,
+  "votedAt": "11:00"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not OK");
+});
+%}
+
+###

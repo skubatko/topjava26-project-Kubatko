@@ -1,0 +1,74 @@
+## User Profiles
+
+### register
+POST http://localhost:8080/api/user/v1/profiles
+Content-Type: application/json
+
+{
+  "name": "New User",
+  "email": "test@mail.ru",
+  "password": "test-password",
+  "enabled": true,
+  "roles": [
+    {
+      "role": "ROLE_USER"
+    }
+  ]
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 201, "Response status is not Created");
+});
+%}
+
+### get
+GET http://localhost:8080/api/user/v1/profiles
+Authorization: Basic test@mail.ru test-password
+Accept: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not OK");
+});
+%}
+
+### update
+PUT http://localhost:8080/api/user/v1/profiles
+Authorization: Basic test@mail.ru test-password
+Content-Type: application/json
+
+{
+  "id": 4,
+  "name": "updatedUser",
+  "email": "test@mail.ru",
+  "password": "test-password",
+  "enabled": true,
+  "roles": [
+    {
+      "role": "ROLE_ADMIN"
+    },
+    {
+      "role": "ROLE_USER"
+    }
+  ]
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not NoContent");
+});
+%}
+
+### delete
+DELETE http://localhost:8080/api/user/v1/profiles
+Authorization: Basic test@mail.ru test-password
+Accept: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not NoContent");
+});
+%}
+
+###
